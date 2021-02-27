@@ -23,17 +23,30 @@
             user-select: none;
             text-align: center;
         }
-        .table {
-            width: 40px;
-            height: 40px;
+        .round-table {
+            width: 42px;
+            height: 42px;
             line-height: 40px;
             border-radius: 50%;
         }
-        .green-table {
-            background-color: rgb(71, 180, 152);
-            border: 2px solid rgba(71, 180, 152, .5);
+        .diamond-table {
+            width: 30px;
+            height: 30px;
+            transform: rotate(45deg);
+        }
+        .diamond-table span {
+            text-align: center;
+            position: absolute;
+            transform: rotate(-45deg);
         }
         .white-table {
+            background-color: rgb(255, 255, 255);
+        }
+        .green-table {
+            background-color: rgb(71, 180, 152);
+        }
+        .blue-table {
+            background-color: rgb(62, 148, 229);
         }
         .draggable:active {
             background-color: rgb(255, 255, 52);
@@ -47,33 +60,35 @@
 <body>
 <div id="container">
     <img src="./gaucho-seating-blank.png">
-    <div class="draggable table" id="table60">
-        60
-    </div>
 </div>
 </body>
 <script type="application/ecmascript">
     let tables = {
         table60: {
-            x: 616,
-            y: 186,
-            style: "green-table"
+            x: 617,
+            y: 187,
+            style: "round-table green-table"
         },
         table61: {
-            x: 16,
-            y: 86,
-            style: "green-table"
+            x: 723,
+            y: 187,
+            style: "round-table green-table"
         },
         table62: {
-            x: 66,
-            y: 16,
-            style: "green-table"
+            x: 827,
+            y: 187,
+            style: "round-table green-table"
         },
         table63: {
-            x: 216,
-            y: 286,
-            style: "green-table"
+            x: 936,
+            y: 187,
+            style: "round-table blue-table"
         },
+        table30: {
+            x: 10,
+            y: 10,
+            style: "diamond-table white-table"
+        }
     }
 
     let container = document.getElementById("container");
@@ -82,11 +97,17 @@
         let tableEl = document.createElement("div");
         tableEl.classList.add("draggable");
         tableEl.classList.add("table");
-        tableEl.classList.add(config.style);
+        for (const style of config.style.split(" ")) {
+            tableEl.classList.add(style);
+        }
         tableEl.setAttribute("id", tableId);
         tableEl.style.left = config.x + "px";
         tableEl.style.top = config.y + "px";
-        tableEl.innerText = tableId.replace("table", "");
+
+        let content = document.createElement("span");
+        content.innerText = tableId.replace("table", "");
+
+        tableEl.appendChild(content);
         config.xOffset = 0;
         config.yOffset = 0;
 
@@ -105,9 +126,17 @@
     container.addEventListener("mouseup", dragEnd, false);
     container.addEventListener("mousemove", drag, false);
 
+    function findDraggableParent(el) {
+        if (el.classList.contains("draggable")) {
+            return el;
+        } else {
+            return findDraggableParent(el.parentElement);
+        }
+    }
+
     function dragStart(e) {
-        let target = e.target;
-        if (target.classList.contains("draggable")) {
+        let target = findDraggableParent(e.target);
+        if (target) {
             currentDraggedItem = target;
         } else {
             console.log("Element not draggable", target);
@@ -167,7 +196,13 @@
     }
 
     function setTranslate(xPos, yPos, el) {
-        el.style.transform = "translate3d(" + xPos + "px, " + yPos + "px, 0)";
+        let translate = "translate3d(" + xPos + "px, " + yPos + "px, 0)";
+        if (el.classList.contains("diamond-table")) {
+            el.style.transform = translate + " rotate(45deg) ";
+        } else {
+            el.style.transform = translate;
+        }
     }
+
 </script>
 </html>
