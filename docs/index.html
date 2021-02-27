@@ -322,6 +322,7 @@
 
     const coords = document.getElementById("coords");
     const container = document.getElementById("container");
+    const body = document.getElementsByTagName("body")[0];
 
     let hidden = false;
     document.getElementById("tog").addEventListener("click", e => {
@@ -336,6 +337,8 @@
         hidden = !hidden;
     });
 
+    body.addEventListener("touchmove", drag);
+    body.addEventListener("mousemove", drag);
 
     function createTable(tableId, config) {
         let tableEl = document.createElement("div");
@@ -352,13 +355,11 @@
         content.innerText = tableId.replace("table", "");
 
         tableEl.appendChild(content);
-        container.addEventListener("touchstart", dragStart, false);
-        container.addEventListener("touchend", dragEnd, false);
-        container.addEventListener("touchmove", drag, false);
+        tableEl.addEventListener("touchstart", dragStart, false);
+        tableEl.addEventListener("touchend", dragEnd, false);
 
-        container.addEventListener("mousedown", dragStart, false);
-        container.addEventListener("mouseup", dragEnd, false);
-        container.addEventListener("mousemove", drag, false);
+        tableEl.addEventListener("mousedown", dragStart, false);
+        tableEl.addEventListener("mouseup", dragEnd, false);
 
         config.xOffset = 0;
         config.yOffset = 0;
@@ -389,7 +390,6 @@
     }
 
     function dragStart(e) {
-        console.log(e);
         let target = findDraggableParent(e.target);
         if (target && target.classList.contains("draggable")) {
             currentDraggedItem = target;
