@@ -22,7 +22,22 @@
             touch-action: none;
             user-select: none;
             text-align: center;
+            transition: border 0.2s linear;
+            animation: hello 1s infinite;
         }
+
+        @keyframes hello {
+            0% {
+                border: 2px solid orangered;
+            }
+            50% {
+                border: 2px solid #333333;
+            }
+            100% {
+                border: 2px solid orangered;
+            }
+        }
+
         .round-table {
             width: 42px;
             height: 42px;
@@ -37,7 +52,24 @@
         .diamond-table span {
             text-align: center;
             position: absolute;
+            margin-left: -7px;
+            margin-top: 6px;
             transform: rotate(-45deg);
+        }
+        .long-rect-table {
+            width: 27px;
+            height: 54px;
+            border-radius: 5px;
+        }
+        .wide-rect-table {
+            width: 54px;
+            height: 27px;
+            border-radius: 5px;
+        }
+        .square-table {
+            width: 34px;
+            height: 34px;
+            border-radius: 5px;
         }
         .white-table {
             background-color: rgb(255, 255, 255);
@@ -47,6 +79,10 @@
         }
         .blue-table {
             background-color: rgb(62, 148, 229);
+        }
+        .togo-table {
+            background-color: #3e94e5;
+            height: 56px;
         }
         .draggable:active {
             background-color: rgb(255, 255, 52);
@@ -60,10 +96,22 @@
 <body>
 <div id="container">
     <img src="./gaucho-seating-blank.png">
+    <div style="position: absolute; top: 4px; left: 100px;">
+        <button id="addTable">add</button>
+        <input type="text" id="coords" width="8">
+    </div>
 </div>
 </body>
 <script type="application/ecmascript">
     let tables = {
+        togo: {
+            x: 551,	y: 746,
+            style: "long-rect-table togo-table"
+        },
+        table20: {
+            x: 795,	y: 747,
+            style: "long-rect-table green-table"
+        },
         table60: {
             x: 617,
             y: 187,
@@ -85,15 +133,77 @@
             style: "round-table blue-table"
         },
         table30: {
-            x: 10,
-            y: 10,
+            x: 632,
+            y: 297,
             style: "diamond-table white-table"
+        },
+        table31: {
+            x: 770,
+            y: 297,
+            style: "diamond-table green-table"
+        },
+        table40: {
+            x: 941,
+            y: 285,
+            style: "long-rect-table green-table"
+        },
+        table41: {
+            x: 941,
+            y: 410,
+            style: "long-rect-table green-table"
+        },
+        table42: {
+            x: 935,
+            y: 547,
+            style: "square-table white-table"
+        },
+        table50: {
+            x: 753,
+            y: 444,
+            style: "diamond-table green-table"
+        },
+        table51: {
+            x: 708,
+            y: 580,
+            style: "diamond-table green-table"
+        },
+        table90: {
+            x: 389,	y: 519,
+            style: "long-rect-table green-table"
+        },
+        table91: {
+            x: 389,	y: 387,
+            style: "long-rect-table green-table"
+        },
+        table104: {
+            x: 1408,	y: 201,
+            style: "long-rect-table white-table"
+        },
+        table105: {
+            x: 1402,	y: 328,
+            style: "wide-rect-table white-table"
+        },
+        table106: {
+            x: 1402,	y: 423,
+            style: "wide-rect-table white-table"
         }
     }
 
-    let container = document.getElementById("container");
+    const addTable = document.getElementById("addTable");
+    addTable.addEventListener("click", e => {
+        let newTableConfig = {
+            x: 0, y: 0, style: "wide-rect-table white-table"
+        };
+        let id = "1"
 
-    for (const [tableId, config] of Object.entries(tables)) {
+        tables["table1"] = newTableConfig
+        createTable("table1", newTableConfig)
+    })
+
+    const coords = document.getElementById("coords");
+    const container = document.getElementById("container");
+
+    function createTable(tableId, config) {
         let tableEl = document.createElement("div");
         tableEl.classList.add("draggable");
         tableEl.classList.add("table");
@@ -114,6 +224,10 @@
         container.appendChild(tableEl);
     }
 
+    for (const [tableId, config] of Object.entries(tables)) {
+        createTable(tableId, config)
+    }
+
     let currentX;
     let currentY;
     let currentDraggedItem;
@@ -127,6 +241,9 @@
     container.addEventListener("mousemove", drag, false);
 
     function findDraggableParent(el) {
+        if (! el) {
+            return;
+        }
         if (el.classList.contains("draggable")) {
             return el;
         } else {
@@ -139,7 +256,7 @@
         if (target) {
             currentDraggedItem = target;
         } else {
-            console.log("Element not draggable", target);
+            console.log("Element not draggable", e.target);
             return;
         }
 
@@ -202,6 +319,8 @@
         } else {
             el.style.transform = translate;
         }
+
+        coords.setAttribute("value", "x: " + xPos + ",\n" + "\ty: " + yPos + ",");
     }
 
 </script>
