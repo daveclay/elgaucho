@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, user-scalable=no" />
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+        #container {
+            width: 100%;
+            height: 100%;
+            display: block;
+            position: absolute;
+            align-items: center;
+            justify-content: center;
+            touch-action: none;
+        }
+        .draggable {
+            position: absolute;
+            touch-action: none;
+            user-select: none;
+            text-align: center;
+        }
+        .table {
+            width: 40px;
+            height: 40px;
+            line-height: 40px;
+            border-radius: 50%;
+        }
+        .green-table {
+            background-color: rgb(71, 180, 152);
+            border: 2px solid rgba(71, 180, 152, .5);
+        }
+        .white-table {
+        }
+        .draggable:active {
+            background-color: rgb(255, 255, 52);
+        }
+        .draggable:hover {
+            cursor: pointer;
+        }
+    </style>
+
+</head>
+<body>
+<div id="container">
+    <img src="./gaucho-seating-blank.png">
+    <div class="draggable table" id="table60">
+        60
+    </div>
+</div>
+</body>
+<script type="application/ecmascript">
+    let tables = {
+        table60: {
+            x: 616,
+            y: 186,
+            style: "green-table"
+        },
+        table61: {
+            x: 16,
+            y: 86,
+            style: "green-table"
+        },
+        table62: {
+            x: 66,
+            y: 16,
+            style: "green-table"
+        },
+        table63: {
+            x: 216,
+            y: 286,
+            style: "green-table"
+        },
+    }
+
+    let container = document.getElementById("container");
+
+    for (const [tableId, config] of Object.entries(tables)) {
+        let tableEl = document.createElement("div");
+        tableEl.classList.add("draggable");
+        tableEl.classList.add("table");
+        tableEl.classList.add(config.style);
+        tableEl.setAttribute("id", tableId);
+        tableEl.style.left = config.x + "px";
+        tableEl.style.top = config.y + "px";
+        tableEl.innerText = tableId.replace("table", "");
+        config.xOffset = 0;
+        config.yOffset = 0;
+
+        container.appendChild(tableEl);
+    }
+
+    let currentX;
+    let currentY;
+    let currentDraggedItem;
+
+    container.addEventListener("touchstart", dragStart, false);
+    container.addEventListener("touchend", dragEnd, false);
+    container.addEventListener("touchmove", drag, false);
+
+    container.addEventListener("mousedown", dragStart, false);
+    container.addEventListener("mouseup", dragEnd, false);
+    container.addEventListener("mousemove", drag, false);
+
+    function dragStart(e) {
+        let target = e.target;
+        if (target.classList.contains("draggable")) {
+            currentDraggedItem = target;
+        } else {
+            console.log("Element not draggable", target);
+            return;
+        }
+
+        let config = tables[target.getAttribute("id")];
+        if (config) {
+            if (e.type === "touchstart") {
+                config.initialX = e.touches[0].clientX - config.xOffset;
+                config.initialY = e.touches[0].clientY - config.yOffset;
+            } else {
+                config.initialX = e.clientX - config.xOffset;
+                config.initialY = e.clientY - config.yOffset;
+            }
+
+            if (target.classList.contains("draggable")) {
+                currentDraggedItem = target;
+            }
+        } else {
+            console.log("Warning: no config for element with draggable class", target);
+        }
+    }
+
+    function dragEnd(e) {
+        if (currentDraggedItem) {
+            let config = tables[currentDraggedItem.getAttribute("id")];
+            if (config) {
+                config.initialX = currentX;
+                config.initialY = currentY;
+                currentDraggedItem = null;
+            } else {
+                console.log("Warning: no config for element with draggable class", target);
+            }
+        }
+    }
+
+    function drag(e) {
+        if (currentDraggedItem) {
+            e.preventDefault();
+
+            let config = tables[currentDraggedItem.getAttribute("id")];
+            if (config) {
+                if (e.type === "touchmove") {
+                    currentX = e.touches[0].clientX - config.initialX;
+                    currentY = e.touches[0].clientY - config.initialY;
+                } else {
+                    currentX = e.clientX - config.initialX;
+                    currentY = e.clientY - config.initialY;
+                }
+
+                config.xOffset = currentX;
+                config.yOffset = currentY;
+                setTranslate(currentX, currentY, currentDraggedItem);
+            }
+        }
+    }
+
+    function setTranslate(xPos, yPos, el) {
+        el.style.transform = "translate3d(" + xPos + "px, " + yPos + "px, 0)";
+    }
+</script>
+</html>
