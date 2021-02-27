@@ -201,8 +201,7 @@
         }
     }
 
-    const addTable = document.getElementById("addTable");
-    addTable.addEventListener("click", e => {
+    function addNewTable() {
         let translateTo = {
             x: window.scrollX + 20,
             y: window.scrollY + 20
@@ -213,6 +212,7 @@
         if (lastDraggedItem) {
             let config = tables[lastDraggedItem.getAttribute("id")];
             newTableConfig.style = config.style;
+
             translateTo.x = config.x + 20;
             translateTo.y = config.y + 20;
         }
@@ -220,8 +220,10 @@
         let newEl = createTable("table1", newTableConfig)
 
         // now transform to the mouse
-        setTranslate(translateTo.x, translateTo.y, newEl);
-    })
+        setTranslate(translateTo.x, translateTo.y, newEl, newTableConfig);
+    }
+
+    document.getElementById("addTable").addEventListener("click", e => addNewTable());
 
     const coords = document.getElementById("coords");
     const container = document.getElementById("container");
@@ -279,7 +281,7 @@
 
     function dragStart(e) {
         let target = findDraggableParent(e.target);
-        if (target) {
+        if (target && target.classList.contains("draggable")) {
             currentDraggedItem = target;
         } else {
             console.log("Element not draggable", e.target);
@@ -288,17 +290,12 @@
 
         let config = tables[target.getAttribute("id")];
         if (config) {
-            if (e.type === "touchstart") {
-                config.initialX = e.touches[0].clientX - config.xOffset;
-                config.initialY = e.touches[0].clientY - config.yOffset;
-            } else {
-                config.initialX = e.clientX - config.xOffset;
-                config.initialY = e.clientY - config.yOffset;
-            }
+            let touch = e.type === "touchstart";
+            let x = touch ? e.touches[0].clientX : e.clientX;
+            let y = touch ? e.touches[0].clientY : e.clientY;
 
-            if (target.classList.contains("draggable")) {
-                currentDraggedItem = target;
-            }
+            config.initialX = x - config.xOffset;
+            config.initialY = y - config.yOffset;
         } else {
             console.log("Warning: no config for element with draggable class", target);
         }
@@ -332,22 +329,31 @@
                     currentY = e.clientY - config.initialY;
                 }
 
-                config.xOffset = currentX;
-                config.yOffset = currentY;
-                setTranslate(currentX, currentY, currentDraggedItem);
+                setTranslate(currentX, currentY, currentDraggedItem, config);
             }
         }
     }
 
-    function setTranslate(xPos, yPos, el) {
-        let translate = "translate3d(" + xPos + "px, " + yPos + "px, 0)";
+    function setTranslate(x, y, el, config) {
+        let translate = "translate3d(" + x + "px, " + y + "px, 0)";
         if (el.classList.contains("diamond-table")) {
             el.style.transform = translate + " rotate(45deg) ";
         } else {
             el.style.transform = translate;
         }
 
-        coords.setAttribute("value", "x: " + xPos + ",\n" + "\ty: " + yPos + ",");
+        // and remember where we moved it:
+        config.xOffset = x;
+        config.yOffset = y;
+
+        let bodyRect = document.body.getBoundingClientRect();
+        let elRect = el.getBoundingClientRect();
+        let location = {
+            top: elRect.top - bodyRect.top,
+            left: elRect.left - bodyRect.left
+        }
+
+        coords.setAttribute("value", "x: " + location.left + ", y: " + location.top + ",");
     }
 
 </script>
