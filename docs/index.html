@@ -5,6 +5,7 @@
           content="width=device-width, initial-scale=1.0, user-scalable=no" />
     <style>
         body {
+            background-color: #222323;
             margin: 0;
             padding: 0;
             font-family: Helvetica, sans-serif;
@@ -118,10 +119,13 @@
 <div id="container">
 </div>
 <img src="./gaucho-seating-blank.png" id="blank-seating" style="position: absolute; top: 0; left: 0; z-index: 10">
-<div style="position: fixed; top: 4px; left: 100px; z-index: 1000; display: none">
-    <button id="tog">toggle</button>
-    <button id="addTable">add</button>
-    <input type="text" id="coords" readonly width="8" style="margin-left: 100px; background-color: #333333; color: gray">
+<div style="position: fixed; top: 4px; left: 10px; z-index: 1000;">
+    <button id="reset">Reset</button>
+    <div style="display: none">
+        <button id="tog">toggle</button>
+        <button id="addTable">add</button>
+        <input type="text" id="coords" readonly width="8" style="margin-left: 100px; background-color: #333333; color: gray">
+    </div>
 </div>
 </body>
 <script type="application/ecmascript">
@@ -306,6 +310,9 @@
     }
 
     document.getElementById("addTable").addEventListener("click", e => addNewTable());
+    document.getElementById("reset").addEventListener("click", e => {
+        location.reload();
+    });
 
     const coords = document.getElementById("coords");
     const container = document.getElementById("container");
