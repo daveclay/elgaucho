@@ -346,6 +346,15 @@
         content.innerText = tableId.replace("table", "");
 
         tableEl.appendChild(content);
+        tableEl.addEventListener("touchstart", dragStart);
+        tableEl.addEventListener("touchend", dragEnd);
+        tableEl.addEventListener("touchmove", drag);
+
+        tableEl.addEventListener("mousedown", dragStart);
+        tableEl.addEventListener("mouseup", dragEnd);
+        tableEl.addEventListener("mousemove", drag);
+
+
         config.xOffset = 0;
         config.yOffset = 0;
 
@@ -362,14 +371,6 @@
     let currentY;
     let currentDraggedItem;
     let lastDraggedItem;
-
-    container.addEventListener("touchstart", dragStart);
-    container.addEventListener("touchend", dragEnd);
-    container.addEventListener("touchmove", drag);
-
-    container.addEventListener("mousedown", dragStart);
-    container.addEventListener("mouseup", dragEnd);
-    container.addEventListener("mousemove", drag);
 
     function findDraggableParent(el) {
         if (! el) {
