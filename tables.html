@@ -96,10 +96,10 @@
 <body>
 <div id="container">
     <img src="./gaucho-seating-blank.png">
-    <div style="position: absolute; top: 4px; left: 100px;">
-        <button id="addTable">add</button>
-        <input type="text" id="coords" width="8">
-    </div>
+</div>
+<div style="position: fixed; top: 4px; left: 100px;">
+    <button id="addTable">add</button>
+    <input type="text" id="coords" readonly width="8" style="margin-left: 100px; background-color: #333333; color: gray">
 </div>
 </body>
 <script type="application/ecmascript">
@@ -167,6 +167,18 @@
             y: 580,
             style: "diamond-table green-table"
         },
+        table70: {
+            x: 1034,	y: 236,
+            style: "round-table white-table"
+        },
+        table71: {
+            x: 1033,	y: 356,
+            style: "round-table green-table"
+        },
+        table72: {
+            x: 1034,	y: 482,
+            style: "round-table green-table"
+        },
         table90: {
             x: 389,	y: 519,
             style: "long-rect-table green-table"
@@ -191,13 +203,24 @@
 
     const addTable = document.getElementById("addTable");
     addTable.addEventListener("click", e => {
+        let translateTo = {
+            x: window.scrollX + 20,
+            y: window.scrollY + 20
+        };
         let newTableConfig = {
             x: 0, y: 0, style: "wide-rect-table white-table"
         };
-        let id = "1"
-
+        if (lastDraggedItem) {
+            let config = tables[lastDraggedItem.getAttribute("id")];
+            newTableConfig.style = config.style;
+            translateTo.x = config.x + 20;
+            translateTo.y = config.y + 20;
+        }
         tables["table1"] = newTableConfig
-        createTable("table1", newTableConfig)
+        let newEl = createTable("table1", newTableConfig)
+
+        // now transform to the mouse
+        setTranslate(translateTo.x, translateTo.y, newEl);
     })
 
     const coords = document.getElementById("coords");
@@ -222,6 +245,8 @@
         config.yOffset = 0;
 
         container.appendChild(tableEl);
+
+        return tableEl;
     }
 
     for (const [tableId, config] of Object.entries(tables)) {
@@ -231,6 +256,7 @@
     let currentX;
     let currentY;
     let currentDraggedItem;
+    let lastDraggedItem;
 
     container.addEventListener("touchstart", dragStart, false);
     container.addEventListener("touchend", dragEnd, false);
@@ -280,6 +306,7 @@
 
     function dragEnd(e) {
         if (currentDraggedItem) {
+            lastDraggedItem = currentDraggedItem;
             let config = tables[currentDraggedItem.getAttribute("id")];
             if (config) {
                 config.initialX = currentX;
