@@ -17,6 +17,7 @@
             align-items: center;
             justify-content: center;
             touch-action: none;
+            z-index: 100;
         }
         .draggable {
             position: absolute;
@@ -24,19 +25,6 @@
             user-select: none;
             text-align: center;
             transition: border 0.2s linear;
-            animation: hello 1s infinite;
-        }
-
-        @keyframes hello {
-            0% {
-                border: 2px solid orangered;
-            }
-            50% {
-                border: 2px solid #333333;
-            }
-            100% {
-                border: 2px solid orangered;
-            }
         }
 
         .circle-table {
@@ -125,14 +113,13 @@
             cursor: pointer;
         }
     </style>
-
 </head>
 <body>
 <div id="container">
-    <img src="./gaucho-seating-blank.png">
-    <img src="./gaucho-seating.png">
 </div>
-<div style="position: fixed; top: 4px; left: 100px;">
+<img src="./gaucho-seating-blank.png" id="blank-seating" style="position: absolute; top: 0; left: 0; z-index: 10">
+<div style="position: fixed; top: 4px; left: 100px; z-index: 1000; display: none">
+    <button id="tog">toggle</button>
     <button id="addTable">add</button>
     <input type="text" id="coords" readonly width="8" style="margin-left: 100px; background-color: #333333; color: gray">
 </div>
@@ -322,6 +309,20 @@
 
     const coords = document.getElementById("coords");
     const container = document.getElementById("container");
+
+    let hidden = false;
+    document.getElementById("tog").addEventListener("click", e => {
+        let blankSeatingImg = document.getElementById("blank-seating");
+        if (hidden) {
+            blankSeatingImg.style.display = "block";
+            container.style.display = "block";
+        } else {
+            blankSeatingImg.style.display = "none";
+            container.style.display = "none";
+        }
+        hidden = !hidden;
+    });
+
 
     function createTable(tableId, config) {
         let tableEl = document.createElement("div");
