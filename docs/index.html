@@ -3,6 +3,7 @@
 <head>
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
     <style>
         body {
             background-color: #222323;
@@ -116,12 +117,36 @@
         .togo-table {
             height: 56px;
             width: 42px;
+            border-radius: 5px;
         }
         .draggable:active {
             background-color: rgb(255, 255, 52);
         }
         .draggable:hover {
             cursor: pointer;
+        }
+
+        /**
+            Controls
+         */
+
+        #controls {
+            position: fixed;
+            top: 4px;
+            left: 10px;
+            z-index: 1000;
+        }
+
+        #controls button {
+            display: inline-block;
+        }
+
+        #table-config {
+            display: inline-block;
+        }
+
+        #table-config .dropdown {
+            display: inline-block;
         }
     </style>
 </head>
@@ -130,11 +155,36 @@
 <div id="container">
 </div>
 <img src="./gaucho-seating-blank.png" id="blank-seating" style="position: absolute; top: 0; left: 0; z-index: 10">
-<div style="position: fixed; top: 4px; left: 10px; z-index: 1000;">
-    <button id="reset">Reset</button>
-
-    <button id="addTable">add</button>
-    <div class="table-config">
+<div id="controls">
+    <button class="btn btn-danger" id="reset">Reset</button>
+    <div id="table-config">
+        <div class="add-table-type dropdown">
+            <button class="btn btn-secondary dropdown-toggle"
+                    type="button"
+                    id="table-type-dropdown-button"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                Table Types
+            </button>
+            <div class="dropdown-menu"
+                 id="table-type-dropdown"
+                 aria-labelledby="table-type-dropdown-button">
+            </div>
+        </div>
+        <div class="add-table-color dropdown">
+            <button class="btn btn-secondary dropdown-toggle"
+                    type="button"
+                    id="table-color-dropdown-button"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                Color
+            </button>
+            <div class="dropdown-menu"
+                 id="table-color-dropdown"
+                 aria-labelledby="table-color-dropdown-button">
+            </div>
+        </div>
+        <button class="btn btn-primary" id="addTable">add</button>
     </div>
 
     <input type="text" id="coords" readonly width="8" style="margin-left: 100px; background-color: #333333; color: gray; display: none">
@@ -145,6 +195,7 @@
 </div>
 
 </body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
 <script type="application/ecmascript">
     let tableTypes = {
         tallRectTable: {
@@ -389,6 +440,8 @@
     const container = document.getElementById("container");
     const body = document.getElementsByTagName("body")[0];
     const tableTemplateEl = document.getElementById("table-template");
+    const tableTypeDropdownEl = document.getElementById("table-type-dropdown");
+    const tableColorDropdownEl = document.getElementById("table-color-dropdown");
 
     function addNewTable() {
         let translateTo = {
@@ -420,18 +473,24 @@
     body.addEventListener("touchmove", drag);
     body.addEventListener("mousemove", drag);
 
-    function createTable(tableId, config) {
-        let tableEl = tableTemplateEl.cloneNode(true);
+    function buildBaseTableIcon(tableId, config) {
+        const tableEl = tableTemplateEl.cloneNode(true);
         tableEl.setAttribute("id", "");
         for (const style of config.type.style.split(" ")) {
             tableEl.classList.add(style);
         }
         tableEl.classList.add(config.color);
         tableEl.setAttribute("id", tableId);
+
+        return tableEl;
+    }
+
+    function createTable(tableId, config) {
+        const tableEl = buildBaseTableIcon(tableId, config);
         tableEl.style.left = config.x + "px";
         tableEl.style.top = config.y + "px";
 
-        let content = tableEl.querySelector(".content");
+        const content = tableEl.querySelector(".content");
         content.innerText = tableId.replace("table", "");
 
         tableEl.appendChild(content);
@@ -441,16 +500,44 @@
         tableEl.addEventListener("mousedown", dragStart, false);
         tableEl.addEventListener("mouseup", dragEnd, false);
 
+        tableEl.addEventListener("dblclick", (e) => {
+            console.log(e);
+        })
+
         config.xOffset = 0;
         config.yOffset = 0;
 
         container.appendChild(tableEl);
-
         return tableEl;
     }
 
     for (const [tableId, config] of Object.entries(tables)) {
         createTable(tableId, config)
+    }
+
+    function createDropdownItem() {
+        const optionDiv = document.createElement("div");
+        optionDiv.classList.add("dropdown-item");
+        return optionDiv;
+    }
+
+    for (const [tableTypeName, tableType] of Object.entries(tableTypes)) {
+        const tableTypeIcon = buildBaseTableIcon("tableConfig" + tableTypeName, {
+            type: tableType,
+            color: tableColors.blue
+        })
+
+        tableTypeIcon.classList.remove("draggable");
+
+        const optionDiv = createDropdownItem();
+        optionDiv.appendChild(tableTypeIcon);
+        tableTypeDropdownEl.appendChild(optionDiv);
+    }
+
+    for (const [tableColorName, tableColor] of Object.entries(tableColors)) {
+        const colorOption = createDropdownItem();
+        colorOption.innerText = tableColor;
+        tableColorDropdownEl.appendChild(colorOption);
     }
 
     let currentX;
