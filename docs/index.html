@@ -18,6 +18,9 @@
             -webkit-user-select: none;
             -ms-user-select: none;
         }
+        #table-template {
+            display: none;
+        }
         #container {
             display: block;
             position: absolute;
@@ -34,7 +37,7 @@
             transition: border 0.2s linear;
         }
 
-        .circle-table {
+        .med-circle-table {
             width: 42px;
             height: 42px;
             line-height: 40px;
@@ -86,7 +89,7 @@
             height: 27px;
             border-radius: 5px;
         }
-        .square-table {
+        .med-square-table {
             width: 34px;
             height: 34px;
             border-radius: 5px;
@@ -112,6 +115,7 @@
         }
         .togo-table {
             height: 56px;
+            width: 42px;
         }
         .draggable:active {
             background-color: rgb(255, 255, 52);
@@ -127,14 +131,56 @@
 <img src="./gaucho-seating-blank.png" id="blank-seating" style="position: absolute; top: 0; left: 0; z-index: 10">
 <div style="position: fixed; top: 4px; left: 10px; z-index: 1000;">
     <button id="reset">Reset</button>
-    <div style="display: none">
-        <button id="tog">toggle</button>
-        <button id="addTable">add</button>
-        <input type="text" id="coords" readonly width="8" style="margin-left: 100px; background-color: #333333; color: gray">
+
+    <button id="addTable">add</button>
+    <div class="table-config">
     </div>
+
+    <input type="text" id="coords" readonly width="8" style="margin-left: 100px; background-color: #333333; color: gray; display: none">
 </div>
+
+<div id="table-template" class="draggable table">
+    <span class="content"></span>
+</div>
+
 </body>
 <script type="application/ecmascript">
+    let tableTypes = {
+        tallRectTable: {
+            style: "tall-rect-table"
+        },
+        togoTable: {
+            style: "togo-table"
+        },
+        fireTable: {
+            style: "fire-table"
+        },
+        smallCircleTable: {
+            style: "small-circle-table"
+        },
+        medCircleTable: {
+            style: "med-circle-table"
+        },
+        smallSquareTable: {
+            style: "small-square-table"
+        },
+        medSquareTable: {
+            style: "med-square-table"
+        },
+        largeSquareTable: {
+            style: "large-square-table"
+        },
+        smallDiamondTable: {
+            style: "small-diamond-table"
+        },
+        largeDiamondTable: {
+            style: "large-diamond-table"
+        },
+        vipRectTable: {
+            style: "small-square-table"
+        }
+    };
+
     let tables = {
         togo: {
             x: 551,	y: 746,
@@ -179,22 +225,22 @@
         table60: {
             x: 617,
             y: 187,
-            style: "circle-table green-table"
+            style: "med-circle-table green-table"
         },
         table61: {
             x: 723,
             y: 187,
-            style: "circle-table green-table"
+            style: "med-circle-table green-table"
         },
         table62: {
             x: 827,
             y: 187,
-            style: "circle-table green-table"
+            style: "med-circle-table green-table"
         },
         table63: {
             x: 936,
             y: 187,
-            style: "circle-table blue-table"
+            style: "med-circle-table blue-table"
         },
         table30: {
             x: 632,
@@ -219,7 +265,7 @@
         table42: {
             x: 935,
             y: 547,
-            style: "square-table white-table"
+            style: "med-square-table white-table"
         },
         table50: {
             x: 751,
@@ -237,15 +283,15 @@
         },
         table70: {
             x: 1034,	y: 236,
-            style: "circle-table white-table"
+            style: "med-circle-table white-table"
         },
         table71: {
             x: 1033,	y: 356,
-            style: "circle-table green-table"
+            style: "med-circle-table green-table"
         },
         table72: {
             x: 1034,	y: 482,
-            style: "circle-table green-table"
+            style: "med-circle-table green-table"
         },
         table90: {
             x: 389,	y: 519,
@@ -293,6 +339,11 @@
         }
     }
 
+    const coords = document.getElementById("coords");
+    const container = document.getElementById("container");
+    const body = document.getElementsByTagName("body")[0];
+    const tableTemplateEl = document.getElementById("table-template");
+
     function addNewTable() {
         let translateTo = {
             x: window.scrollX + 20,
@@ -320,30 +371,12 @@
         location.reload();
     });
 
-    const coords = document.getElementById("coords");
-    const container = document.getElementById("container");
-    const body = document.getElementsByTagName("body")[0];
-
-    let hidden = false;
-    document.getElementById("tog").addEventListener("click", e => {
-        let blankSeatingImg = document.getElementById("blank-seating");
-        if (hidden) {
-            blankSeatingImg.style.display = "block";
-            container.style.display = "block";
-        } else {
-            blankSeatingImg.style.display = "none";
-            container.style.display = "none";
-        }
-        hidden = !hidden;
-    });
-
     body.addEventListener("touchmove", drag);
     body.addEventListener("mousemove", drag);
 
     function createTable(tableId, config) {
-        let tableEl = document.createElement("div");
-        tableEl.classList.add("draggable");
-        tableEl.classList.add("table");
+        let tableEl = tableTemplateEl.cloneNode(true);
+        tableEl.setAttribute("id", "");
         for (const style of config.style.split(" ")) {
             tableEl.classList.add(style);
         }
@@ -351,7 +384,7 @@
         tableEl.style.left = config.x + "px";
         tableEl.style.top = config.y + "px";
 
-        let content = document.createElement("span");
+        let content = tableEl.querySelector(".content");
         content.innerText = tableId.replace("table", "");
 
         tableEl.appendChild(content);
@@ -372,6 +405,7 @@
     for (const [tableId, config] of Object.entries(tables)) {
         createTable(tableId, config)
     }
+
 
     let currentX;
     let currentY;
