@@ -126,6 +126,7 @@
     </style>
 </head>
 <body>
+<img src="./gaucho-seating.png" style="position: absolute; z-index: 10000; display: none">
 <div id="container">
 </div>
 <img src="./gaucho-seating-blank.png" id="blank-seating" style="position: absolute; top: 0; left: 0; z-index: 10">
@@ -149,6 +150,9 @@
         tallRectTable: {
             style: "tall-rect-table"
         },
+        wideRectTable: {
+            style: "wide-rect-table"
+        },
         togoTable: {
             style: "togo-table"
         },
@@ -171,171 +175,213 @@
             style: "large-square-table"
         },
         smallDiamondTable: {
-            style: "small-diamond-table"
+            style: "small-diamond-table diamond-table"
         },
         largeDiamondTable: {
-            style: "large-diamond-table"
+            style: "large-diamond-table diamond-table"
         },
         vipRectTable: {
-            style: "small-square-table"
-        }
+            style: "vip-rect-table"
+        },
     };
+
+    let tableColors = {
+        blue: "blue-table",
+        green: "green-table",
+        white: "white-table"
+    }
 
     let tables = {
         togo: {
             x: 551,	y: 746,
-            style: "tall-rect-table togo-table blue-table"
+            type: tableTypes.togoTable,
+            color: tableColors.blue
         },
         fire: {
             x: 483, y: 338,
-            style: "fire-table blue-table"
+            type: tableTypes.fireTable,
+            color: tableColors.blue
         },
         table1: {
             x: 306, y: 642,
-            style: "small-circle-table white-table"
+            type: tableTypes.smallCircleTable,
+            color: tableColors.white
         },
         table2: {
             x: 243, y: 642,
-            style: "small-circle-table green-table"
+            type: tableTypes.smallCircleTable,
+            color: tableColors.green
         },
         table3: {
             x: 241, y: 283,
-            style: "small-circle-table white-table"
+            type: tableTypes.smallCircleTable,
+            color: tableColors.white
         },
         table4: {
             x: 308, y: 284,
-            style: "small-circle-table white-table"
+            type: tableTypes.smallCircleTable,
+            color: tableColors.white
         },
         table20: {
             x: 795,	y: 747,
-            style: "tall-rect-table green-table"
+            type: tableTypes.tallRectTable,
+            color: tableColors.green
         },
         table21: {
             x: 934, y: 743,
-            style: "small-square-table white-table"
+            type: tableTypes.smallSquareTable,
+            color: tableColors.white
         },
         table22: {
             x: 887, y: 855,
-            style: "small-square-table white-table"
+            type: tableTypes.smallSquareTable,
+            color: tableColors.white
         },
         table23: {
             x: 771, y: 851,
-            style: "large-square-table green-table"
+            type: tableTypes.largeSquareTable,
+            color: tableColors.green
         },
         table60: {
             x: 617,
             y: 187,
-            style: "med-circle-table green-table"
+            type: tableTypes.medCircleTable,
+            color: tableColors.green
         },
         table61: {
             x: 723,
             y: 187,
-            style: "med-circle-table green-table"
+            type: tableTypes.medCircleTable,
+            color: tableColors.green
         },
         table62: {
             x: 827,
             y: 187,
-            style: "med-circle-table green-table"
+            type: tableTypes.medCircleTable,
+            color: tableColors.green
         },
         table63: {
             x: 936,
             y: 187,
-            style: "med-circle-table blue-table"
+            type: tableTypes.medCircleTable,
+            color: tableColors.blue
         },
         table30: {
             x: 632,
             y: 297,
-            style: "small-diamond-table diamond-table white-table"
+            type: tableTypes.smallDiamondTable,
+            color: tableColors.white
         },
         table31: {
             x: 770,
             y: 297,
-            style: "small-diamond-table diamond-table green-table"
+            type: tableTypes.smallDiamondTable,
+            color: tableColors.green
         },
         table40: {
             x: 941,
             y: 285,
-            style: "tall-rect-table green-table"
+            type: tableTypes.tallRectTable,
+            color: tableColors.green
         },
         table41: {
             x: 941,
             y: 410,
-            style: "tall-rect-table green-table"
+            type: tableTypes.tallRectTable,
+            color: tableColors.green
         },
         table42: {
             x: 935,
             y: 547,
-            style: "med-square-table white-table"
+            type: tableTypes.medSquareTable,
+            color: tableColors.white
         },
         table50: {
             x: 751,
             y: 443,
-            style: "large-diamond-table diamond-table green-table"
+            type: tableTypes.largeDiamondTable,
+            color: tableColors.green
         },
         table51: {
             x: 708,
             y: 580,
-            style: "small-diamond-table diamond-table green-table"
+            type: tableTypes.smallDiamondTable,
+            color: tableColors.green
         },
         table53: {
             x: 654, y: 766,
-            style: "vip-rect-table green-table"
+            type: tableTypes.vipRectTable,
+            color: tableColors.green
         },
         table70: {
             x: 1034,	y: 236,
-            style: "med-circle-table white-table"
+            type: tableTypes.medCircleTable,
+            color: tableColors.white
         },
         table71: {
             x: 1033,	y: 356,
-            style: "med-circle-table green-table"
+            type: tableTypes.medCircleTable,
+            color: tableColors.green
         },
         table72: {
             x: 1034,	y: 482,
-            style: "med-circle-table green-table"
+            type: tableTypes.medCircleTable,
+            color: tableColors.green
         },
         table90: {
             x: 389,	y: 519,
-            style: "tall-rect-table green-table"
+            type: tableTypes.tallRectTable,
+            color: tableColors.green
         },
         table91: {
             x: 389,	y: 387,
-            style: "tall-rect-table green-table"
+            type: tableTypes.tallRectTable,
+            color: tableColors.green
         },
         table101: {
             x: 1291, y: 486,
-            style: "wide-rect-table white-table"
+            type: tableTypes.wideRectTable,
+            color: tableColors.white
         },
         table102: {
             x: 1293, y: 362,
-            style: "large-diamond-table diamond-table white-table"
+            type: tableTypes.largeDiamondTable,
+            color: tableColors.white
         },
         table103: {
             x: 1286, y: 249,
-            style: "wide-rect-table white-table"
+            type: tableTypes.wideRectTable,
+            color: tableColors.white
         },
         table104: {
             x: 1408,	y: 201,
-            style: "tall-rect-table white-table"
+            type: tableTypes.tallRectTable,
+            color: tableColors.white
         },
         table105: {
             x: 1402,	y: 328,
-            style: "wide-rect-table white-table"
+            type: tableTypes.wideRectTable,
+            color: tableColors.white
         },
         table106: {
             x: 1402,	y: 423,
-            style: "wide-rect-table white-table"
+            type: tableTypes.wideRectTable,
+            color: tableColors.white
         },
         table201: {
             x: 1209, y: 661,
-            style: "large-diamond-table diamond-table white-table"
+            type: tableTypes.largeDiamondTable,
+            color: tableColors.white
         },
         table202: {
             x: 1210, y: 797,
-            style: "tall-rect-table white-table"
+            type: tableTypes.tallRectTable,
+            color: tableColors.white
         },
         table203: {
             x: 1053, y: 742,
-            style: "small-square-table white-table"
+            type: tableTypes.smallCircleTable,
+            color: tableColors.white
         }
     }
 
@@ -377,9 +423,10 @@
     function createTable(tableId, config) {
         let tableEl = tableTemplateEl.cloneNode(true);
         tableEl.setAttribute("id", "");
-        for (const style of config.style.split(" ")) {
+        for (const style of config.type.style.split(" ")) {
             tableEl.classList.add(style);
         }
+        tableEl.classList.add(config.color);
         tableEl.setAttribute("id", tableId);
         tableEl.style.left = config.x + "px";
         tableEl.style.top = config.y + "px";
@@ -405,7 +452,6 @@
     for (const [tableId, config] of Object.entries(tables)) {
         createTable(tableId, config)
     }
-
 
     let currentX;
     let currentY;
