@@ -38,6 +38,18 @@
             transition: border 0.2s linear;
         }
 
+        /* table types */
+        .table {
+        }
+        .table-content {
+            text-align: center;
+            display: block;
+            position: relative;
+        }
+        .table .form-content {
+            position: relative;
+            z-index: 10000;
+        }
         .med-circle-table {
             width: 42px;
             height: 42px;
@@ -56,6 +68,10 @@
             line-height: 68px;
             border-radius: 50%;
         }
+        .fire-table .form-content {
+            left: 70px;
+            top: -76px;
+        }
         .small-diamond-table {
             width: 27px;
             height: 27px;
@@ -68,12 +84,15 @@
             transform: rotate(45deg);
             border-radius: 5px;
         }
-        .diamond-table span {
-            text-align: center;
+        .diamond-table .table-content {
             position: absolute;
-            margin-left: -9px;
-            margin-top: 6px;
+            margin-left: 4px;
+            margin-top: 2px;
             transform: rotate(-45deg);
+        }
+        .diamond-table .form-content {
+            left: 70px;
+            top: -90px;
         }
         .vip-rect-table {
             width: 34px;
@@ -85,20 +104,36 @@
             height: 54px;
             border-radius: 5px;
         }
+        .tall-rect-table .form-content {
+            left: 24px;
+            top: -32px;
+        }
         .wide-rect-table {
             width: 54px;
             height: 27px;
             border-radius: 5px;
+        }
+        .wide-rect-table .form-content {
+            left: 52px;
+            top: -33px;
+        }
+        .small-square-table {
+            width: 27px;
+            height: 27px;
+            border-radius: 5px;
+        }
+        .small-square-table .form-content {
+            left: 28px;
+            top: -33px;
         }
         .med-square-table {
             width: 34px;
             height: 34px;
             border-radius: 5px;
         }
-        .small-square-table {
-            width: 27px;
-            height: 27px;
-            border-radius: 5px;
+        .med-square-table .form-content {
+            left: 34px;
+            top: -33px;
         }
         .large-square-table {
             width: 42px;
@@ -148,6 +183,10 @@
         #table-config .dropdown {
             display: inline-block;
         }
+
+        .form-content {
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -191,8 +230,18 @@
 </div>
 
 <div id="table-template" class="draggable table">
-    <span class="content"></span>
+    <div class="table-content">
+        <span class="id"></span>
+        <div class="form-content">
+            <form class="form-inline" role="form">
+                <div class="form-group">
+                    <input class="tableId" type="text" placeholder="10"/>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
+
 
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
@@ -442,6 +491,7 @@
     const tableTemplateEl = document.getElementById("table-template");
     const tableTypeDropdownEl = document.getElementById("table-type-dropdown");
     const tableColorDropdownEl = document.getElementById("table-color-dropdown");
+    const backgroundEl = document.getElementById("blank-seating");
 
     function addNewTable() {
         let translateTo = {
@@ -451,8 +501,8 @@
         let newTableConfig = {
             x: 0, y: 0, style: "wide-rect-table white-table"
         };
-        if (lastDraggedItem) {
-            let config = tables[lastDraggedItem.getAttribute("id")];
+        if (lastDraggedElement) {
+            let config = tables[lastDraggedElement.getAttribute("id")];
             newTableConfig.style = config.style;
 
             translateTo.x = config.x + 20;
@@ -473,6 +523,9 @@
     body.addEventListener("touchmove", drag);
     body.addEventListener("mousemove", drag);
 
+    backgroundEl.addEventListener("tap", () => hideCurrentTableForm());
+    backgroundEl.addEventListener("click", () => hideCurrentTableForm());
+
     function buildBaseTableIcon(tableId, config) {
         const tableEl = tableTemplateEl.cloneNode(true);
         tableEl.setAttribute("id", "");
@@ -485,15 +538,28 @@
         return tableEl;
     }
 
+    function showTableEditForm(tableEl) {
+        currentFormTableElement = tableEl;
+        const popoverEl = tableEl.querySelector(".form-content");
+        popoverEl.style.display = "block";
+    }
+
+    function hideCurrentTableForm() {
+        if (currentFormTableElement) {
+            const popoverEl = currentFormTableElement.querySelector(".form-content");
+            popoverEl.style.display = "none";
+        }
+    }
+
     function createTable(tableId, config) {
         const tableEl = buildBaseTableIcon(tableId, config);
         tableEl.style.left = config.x + "px";
         tableEl.style.top = config.y + "px";
 
-        const content = tableEl.querySelector(".content");
-        content.innerText = tableId.replace("table", "");
+        const contentEl = tableEl.querySelector(".table-content");
+        const idEl = contentEl.querySelector(".id");
+        idEl.innerText = tableId.replace("table", "");
 
-        tableEl.appendChild(content);
         tableEl.addEventListener("touchstart", dragStart, false);
         tableEl.addEventListener("touchend", dragEnd, false);
 
@@ -501,8 +567,9 @@
         tableEl.addEventListener("mouseup", dragEnd, false);
 
         tableEl.addEventListener("dblclick", (e) => {
-            console.log(e);
-        })
+            const tableEl = findDraggableParent(e.target);
+            showTableEditForm(tableEl);
+        });
 
         config.xOffset = 0;
         config.yOffset = 0;
@@ -536,14 +603,15 @@
 
     for (const [tableColorName, tableColor] of Object.entries(tableColors)) {
         const colorOption = createDropdownItem();
-        colorOption.innerText = tableColor;
+        colorOption.innerText = tableColorName;
         tableColorDropdownEl.appendChild(colorOption);
     }
 
     let currentX;
     let currentY;
-    let currentDraggedItem;
-    let lastDraggedItem;
+    let currentDraggedElement;
+    let lastDraggedElement;
+    let currentFormTableElement;
 
     function findDraggableParent(el) {
         if (! el) {
@@ -558,8 +626,13 @@
 
     function dragStart(e) {
         let target = findDraggableParent(e.target);
+
+        if (currentFormTableElement && target != currentFormTableElement) {
+            hideCurrentTableForm();
+        }
+
         if (target && target.classList.contains("draggable")) {
-            currentDraggedItem = target;
+            currentDraggedElement = target;
         } else {
             console.log("Element not draggable", e.target);
             return;
@@ -579,13 +652,13 @@
     }
 
     function dragEnd(e) {
-        if (currentDraggedItem) {
-            lastDraggedItem = currentDraggedItem;
-            let config = tables[currentDraggedItem.getAttribute("id")];
+        if (currentDraggedElement) {
+            lastDraggedElement = currentDraggedElement;
+            let config = tables[currentDraggedElement.getAttribute("id")];
             if (config) {
                 config.initialX = currentX;
                 config.initialY = currentY;
-                currentDraggedItem = null;
+                currentDraggedElement = null;
             } else {
                 console.log("Warning: no config for element with draggable class", target);
             }
@@ -593,10 +666,10 @@
     }
 
     function drag(e) {
-        if (currentDraggedItem) {
+        if (currentDraggedElement) {
             e.preventDefault();
 
-            let config = tables[currentDraggedItem.getAttribute("id")];
+            let config = tables[currentDraggedElement.getAttribute("id")];
             if (config) {
                 if (e.type === "touchmove") {
                     currentX = e.touches[0].clientX - config.initialX;
@@ -606,7 +679,7 @@
                     currentY = e.clientY - config.initialY;
                 }
 
-                setTranslate(currentX, currentY, currentDraggedItem, config);
+                setTranslate(currentX, currentY, currentDraggedElement, config);
             }
         }
     }
