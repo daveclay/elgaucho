@@ -7,7 +7,7 @@ const TableLayout = ({tables}) => (
     <div id="container">
         {
             tables.map(table => {
-                return <Table key={table.id} table={table}/>
+                return <Table key={table.name} table={table}/>
             })
         }
     </div>

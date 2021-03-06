@@ -26,67 +26,19 @@ img {
     touch-action: none;
     z-index: 100;
 }
-.draggable {
+.react-draggable {
     position: absolute;
-    touch-action: none;
-    user-select: none;
-    text-align: center;
-    transition: border 0.2s linear;
 }
 
 /* table types */
-.table {
-}
 .table-content {
     text-align: center;
     display: block;
-    position: relative;
-}
-.table .form-content {
-    position: relative;
-    z-index: 10000;
-}
-.fire-table .form-content {
-    left: 70px;
-    top: -76px;
-}
-.diamond-table {
-    transform: rotate(45deg);
-    border-radius: 5px;
-}
-.diamond-table .table-content {
     position: absolute;
-    margin-left: 4px;
-    margin-top: 2px;
-    transform: rotate(-45deg);
-}
-.diamond-table .form-content {
-    left: 70px;
-    top: -90px;
-}
-
-.tall-rect-table .form-content {
-    left: 24px;
-    top: -32px;
-}
-.wide-rect-table .form-content {
-    left: 52px;
-    top: -33px;
-}
-.small-square-table .form-content {
-    left: 28px;
-    top: -33px;
-}
-.med-square-table .form-content {
-    left: 34px;
-    top: -33px;
-}
-
-.draggable:active {
-    background-color: rgb(255, 255, 52);
-}
-.draggable:hover {
-    cursor: pointer;
+    top: 0;
+    left: 0;
+    width: 100%;
+    color: black;
 }
 
 /**
