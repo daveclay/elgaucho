@@ -6,6 +6,14 @@ import {} from "../selectors/selectors"
 
 export const initialState = {
     // TODO: mixin styles for common types like "diamond"
+    tableTypeMixins: {
+        diamond: {
+            style: {
+                transform: "rotate(45deg)",
+                borderRadius: "5px",
+            }
+        }
+    },
     tableTypes: {
         tallRectTable: {
             style: {
@@ -74,14 +82,14 @@ export const initialState = {
             }
         },
         smallDiamondTable: {
-            // style: "small-diamond-table diamond-table"
+            mixin: "diamond",
             style: {
                 width: "27px",
                 height: "27px",
             }
         },
         largeDiamondTable: {
-            //style: "large-diamond-table diamond-table"
+            mixin: "diamond",
             style: {
                 width: "32px",
                 height: "32px",
