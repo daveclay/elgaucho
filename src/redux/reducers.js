@@ -5,49 +5,113 @@ import { resolveTableReferences } from "./mutators"
 import {} from "../selectors/selectors"
 
 export const initialState = {
+    // TODO: mixin styles for common types like "diamond"
     tableTypes: {
         tallRectTable: {
-            style: "tall-rect-table"
+            style: {
+                width: "27px",
+                height: "54px",
+                borderRadius: "5px",
+            }
         },
         wideRectTable: {
-            style: "wide-rect-table"
+            style: {
+                width: "54px",
+                height: "27px",
+                borderRadius: "5px",
+            }
         },
         togoTable: {
-            style: "togo-table"
+            style: {
+                height: "56px",
+                width: "42px",
+                borderRadius: "5px",
+            }
         },
         fireTable: {
-            style: "fire-table"
+            style: {
+                width: "68px",
+                height: "68px",
+                lineHeight: "68px",
+                borderRadius: "50%",
+            }
         },
         smallCircleTable: {
-            style: "small-circle-table"
+            style: {
+                width: "27px",
+                height: "27px",
+                lineHeight: "27px",
+                borderRadius: "50%",
+            }
         },
         medCircleTable: {
-            style: "med-circle-table"
+            style: {
+                width: "42px",
+                height: "42px",
+                lineHeight: "40px",
+                borderRadius: "50%",
+            }
         },
         smallSquareTable: {
-            style: "small-square-table"
+            style: {
+                width: "27px",
+                height: "27px",
+                borderRadius: "5px",
+            }
         },
         medSquareTable: {
-            style: "med-square-table"
+            style: {
+                width: "34px",
+                height: "34px",
+                borderRadius: "5px",
+            }
         },
         largeSquareTable: {
-            style: "large-square-table"
+            style: {
+                width: "42px",
+                height: "42px",
+                borderRadius: "5px",
+            }
         },
         smallDiamondTable: {
-            style: "small-diamond-table diamond-table"
+            // style: "small-diamond-table diamond-table"
+            style: {
+                width: "27px",
+                height: "27px",
+            }
         },
         largeDiamondTable: {
-            style: "large-diamond-table diamond-table"
+            //style: "large-diamond-table diamond-table"
+            style: {
+                width: "32px",
+                height: "32px",
+            }
         },
         vipRectTable: {
-            style: "vip-rect-table"
+            style: {
+                width: "34px",
+                height: "68px",
+                borderRadius: "5px",
+            }
         },
     },
 
     tableColors: {
-        blue: "blue-table",
-        green: "green-table",
-        white: "white-table"
+        blue: {
+            style: {
+                backgroundColor: "rgb(62, 148, 229)"
+            }
+        },
+        green: {
+            style: {
+                backgroundColor: "rgb(71, 180, 152)"
+            }
+        },
+        white: {
+            style: {
+                backgroundColor: "rgb(255, 255, 255)"
+            }
+        }
     },
 
     tableConfigs: {

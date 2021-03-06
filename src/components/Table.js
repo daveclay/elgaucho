@@ -3,7 +3,7 @@ import {
 } from "../redux/actions"
 
 const Table = ({table}) => (
-    <div className="draggable table">
+    <div className="draggable table" style={table.style}>
         <div className="table-content">
             <span className="table-id">{table.id}</span>
             <div className="form-content">
