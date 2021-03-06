@@ -1,0 +1,188 @@
+body {
+    background-color: #222323;
+    margin: 0;
+    padding: 0;
+    font-family: Helvetica, sans-serif;
+}
+#blank-seating {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 10;
+}
+img {
+    user-drag: none;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-drag: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+}
+#table-template {
+    display: none;
+}
+#container {
+    display: block;
+    position: absolute;
+    align-items: center;
+    justify-content: center;
+    touch-action: none;
+    z-index: 100;
+}
+.draggable {
+    position: absolute;
+    touch-action: none;
+    user-select: none;
+    text-align: center;
+    transition: border 0.2s linear;
+}
+
+/* table types */
+.table {
+}
+.table-content {
+    text-align: center;
+    display: block;
+    position: relative;
+}
+.table .form-content {
+    position: relative;
+    z-index: 10000;
+}
+.med-circle-table {
+    width: 42px;
+    height: 42px;
+    line-height: 40px;
+    border-radius: 50%;
+}
+.small-circle-table {
+    width: 27px;
+    height: 27px;
+    line-height: 27px;
+    border-radius: 50%;
+}
+.fire-table {
+    width: 68px;
+    height: 68px;
+    line-height: 68px;
+    border-radius: 50%;
+}
+.fire-table .form-content {
+    left: 70px;
+    top: -76px;
+}
+.small-diamond-table {
+    width: 27px;
+    height: 27px;
+}
+.large-diamond-table {
+    width: 32px;
+    height: 32px;
+}
+.diamond-table {
+    transform: rotate(45deg);
+    border-radius: 5px;
+}
+.diamond-table .table-content {
+    position: absolute;
+    margin-left: 4px;
+    margin-top: 2px;
+    transform: rotate(-45deg);
+}
+.diamond-table .form-content {
+    left: 70px;
+    top: -90px;
+}
+.vip-rect-table {
+    width: 34px;
+    height: 68px;
+    border-radius: 5px;
+}
+.tall-rect-table {
+    width: 27px;
+    height: 54px;
+    border-radius: 5px;
+}
+.tall-rect-table .form-content {
+    left: 24px;
+    top: -32px;
+}
+.wide-rect-table {
+    width: 54px;
+    height: 27px;
+    border-radius: 5px;
+}
+.wide-rect-table .form-content {
+    left: 52px;
+    top: -33px;
+}
+.small-square-table {
+    width: 27px;
+    height: 27px;
+    border-radius: 5px;
+}
+.small-square-table .form-content {
+    left: 28px;
+    top: -33px;
+}
+.med-square-table {
+    width: 34px;
+    height: 34px;
+    border-radius: 5px;
+}
+.med-square-table .form-content {
+    left: 34px;
+    top: -33px;
+}
+.large-square-table {
+    width: 42px;
+    height: 42px;
+    border-radius: 5px;
+}
+.white-table {
+    background-color: rgb(255, 255, 255);
+}
+.green-table {
+    background-color: rgb(71, 180, 152);
+}
+.blue-table {
+    background-color: rgb(62, 148, 229);
+}
+.togo-table {
+    height: 56px;
+    width: 42px;
+    border-radius: 5px;
+}
+.draggable:active {
+    background-color: rgb(255, 255, 52);
+}
+.draggable:hover {
+    cursor: pointer;
+}
+
+/**
+    Controls
+ */
+
+#controls {
+    position: fixed;
+    top: 4px;
+    left: 10px;
+    z-index: 1000;
+}
+
+#controls button {
+    display: inline-block;
+}
+
+#table-config {
+    display: inline-block;
+}
+
+#table-config .dropdown {
+    display: inline-block;
+}
+
+.form-content {
+    display: none;
+}
