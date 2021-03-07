@@ -6,3 +6,10 @@ export const init = () => ({
   type: 'init'
 })
 
+export const onTableTypeSelected = (tableType) => (dispatch) => {
+  dispatch({
+    type: 'onTableTypeSelected',
+    tableType
+  })
+}
+

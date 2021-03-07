@@ -20,3 +20,7 @@ export const resolveTableReferences = state => {
   })
 }
 
+export const setAddTableFormType = (state, action) => {
+  state.addTableForm.tableType = action.tableType
+}
+

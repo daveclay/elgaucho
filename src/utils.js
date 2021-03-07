@@ -25,7 +25,8 @@ export const reduceAll = (state, ...reducers) => {
   return reducers.reduce((newState, reducer) => reducer(newState), state)
 }
 
-export const mutatorToReducer = (mutator) => (oldState, action) => produce(oldState, newState => mutator(newState, action))
+export const mutatorToReducer = (mutator) => (origState, action) => produce(origState, newState => mutator(newState, action))
+
 
 export const camelCaseToDisplay = (text) => {
   const replaced = text.replace( /([A-Z])/g, " $1" );

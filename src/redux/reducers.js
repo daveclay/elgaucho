@@ -1,8 +1,9 @@
 import * as actions from "./actions"
 import {map, reducer} from "./utils/redux-map";
 import {mutatorToReducer, ArrayUtils, reduceAll} from "../utils";
-import {resolveTableReferences} from "./mutators"
+import {resolveTableReferences, setAddTableFormType} from "./mutators"
 import {} from "../selectors/selectors"
+import produce from "immer";
 
 export const initialState = {
   tableTypeMixins: [
@@ -388,11 +389,17 @@ export const initialState = {
       colorId: "white",
       name: "203"
     }
-  ]
+  ],
+  addTableForm: {
+    tableType: null,
+    tableColor: null
+  }
 }
 
-const init = state => reduceAll(state, mutatorToReducer(resolveTableReferences))
+const init = mutatorToReducer(resolveTableReferences)
+const onTableTypeSelected = mutatorToReducer(setAddTableFormType)
 
 map('init', init)
+map('onTableTypeSelected', onTableTypeSelected)
 
 export const rootReducer = reducer

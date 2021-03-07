@@ -1,5 +1,7 @@
 import {connect} from "react-redux";
-import {} from "../redux/actions"
+import {
+  onTableTypeSelected
+} from "../redux/actions"
 import {Dropdown} from "react-bootstrap";
 import {newStateSelector} from "../selectors/selectors";
 import TableIcon from "./TableIcon";
@@ -8,7 +10,8 @@ import {camelCaseToDisplay} from "../utils";
 
 const TableTypeDropdown = ({
   tableTypes,
-  defaultTableColor
+  defaultTableColor,
+  onTableTypeSelected
 }) => (
   <Dropdown>
     <Dropdown.Toggle variant="secondary">
@@ -17,7 +20,7 @@ const TableTypeDropdown = ({
     <Dropdown.Menu>
       {
         tableTypes.map(tableType =>
-          <Dropdown.Item href="#/action-1" key={tableType.name}>
+          <Dropdown.Item onSelect={() => onTableTypeSelected(tableType)} key={tableType.name}>
             <div className="table-type-option">
               <TableIcon table={buildTable({name: tableType.name}, tableType, defaultTableColor)}/>
               <div className="name">
@@ -40,5 +43,6 @@ const mapStateToProps = (state, ownProps) => ({
 export default connect(
   mapStateToProps,
   {
+    onTableTypeSelected
   }
 )(TableTypeDropdown);
