@@ -20,12 +20,12 @@ export const onTableColorSelected = (tableColor) => (dispatch) => {
   })
 }
 
-export const onOpenAddTableForm = () => ({
-  type: 'onOpenAddTableForm'
+export const onOpenTableForm = () => ({
+  type: 'onOpenTableForm'
 })
 
-export const onCloseAddTableForm = () => ({
-  type: 'onCloseAddTableForm'
+export const onCloseTableForm = () => ({
+  type: 'onCloseTableForm'
 })
 
 

@@ -1,43 +1,43 @@
 import {connect} from "react-redux";
 import {
-  onOpenAddTableForm,
-  onCloseAddTableForm,
+  onOpenTableForm,
+  onCloseTableForm,
 } from "../redux/actions"
 import TableTypeDropdown from "./TableTypeDropdown";
 import TableColorDropdown from "./TableColorDropdown";
 import {Button, Modal} from "react-bootstrap";
 import TableIcon from "./TableIcon";
 
-const Controls = ({
-                    addTableForm,
-                    onOpenAddTableForm,
-                    onCloseAddTableForm,
+const TableForm = ({
+                    tableForm,
+                    onOpenTableForm,
+                    onCloseTableForm,
 }) => (
   <div id="controls">
     <button className="btn btn-danger" id="reset">Reset</button>
     <div id="table-config">
       <div className="config-option">
-        <Button variant="primary" onClick={onOpenAddTableForm}>Add Table</Button>
+        <Button variant="primary" onClick={onOpenTableForm}>Add Table</Button>
       </div>
-      <Modal show={addTableForm.visible} onHide={onCloseAddTableForm}>
+      <Modal show={tableForm.visible} onHide={onCloseTableForm}>
         <Modal.Header closeButton>
-          <Modal.Title>Add Table</Modal.Title>
+          <Modal.Title>Table Options</Modal.Title>
         </Modal.Header>
-        <Modal.Body className="add-table-form-modal">
+        <Modal.Body className="table-form-modal">
           <div>
             <TableTypeDropdown />
             <TableColorDropdown />
           </div>
           <div>
-            <TableIcon table={addTableForm.table}/>
+            <TableIcon table={tableForm.table}/>
           </div>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={onCloseAddTableForm}>
+          <Button variant="secondary" onClick={onCloseTableForm}>
             Cancel
           </Button>
-          <Button variant="primary" onClick={onCloseAddTableForm}>
-            Add
+          <Button variant="primary" onClick={onCloseTableForm}>
+            Save
           </Button>
         </Modal.Footer>
       </Modal>
@@ -49,13 +49,13 @@ const Controls = ({
 
 const mapStateToProps = (state, ownProps) => ({
   ownProps,
-  addTableForm: state.addTableForm
+  tableForm: state.tableForm
 })
 
 export default connect(
   mapStateToProps,
   {
-    onOpenAddTableForm,
-    onCloseAddTableForm
+    onOpenTableForm,
+    onCloseTableForm
   }
-)(Controls);
+)(TableForm);
