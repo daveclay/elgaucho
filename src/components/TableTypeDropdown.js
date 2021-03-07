@@ -1,5 +1,6 @@
 import {connect} from "react-redux";
 import {
+  onOpenTableTypeForm,
   onTableTypeSelected
 } from "../redux/actions"
 import {Dropdown} from "react-bootstrap";
@@ -13,27 +14,47 @@ const buildTable = (tableType, tableColor) => ({
   tableColor,
 })
 
+const buildDropdownMenu = (tableTypes,
+                           table,
+                           onCreateNewTableTypeSelected,
+                           onTableTypeSelected) => {
+  const options = tableTypes.map(tableType =>
+    <Dropdown.Item onSelect={() => onTableTypeSelected(tableType)} key={tableType.name}>
+      <div className="table-type-option">
+        <TableIcon table={buildTable(tableType, table.tableColor)}/>
+        <div className="name">
+          {camelCaseToDisplay(tableType.name)}
+        </div>
+      </div>
+    </Dropdown.Item>
+  )
+
+  options.push(
+    <Dropdown.Item onSelect={() => onCreateNewTableTypeSelected()} key="__new">
+      Create New Table Type
+    </Dropdown.Item>
+  )
+
+  return options
+};
+
 const TableTypeDropdown = ({
-  tableTypes,
-  table,
-  onTableTypeSelected
-}) => (
+                             tableTypes,
+                             table,
+                             onCreateNewTableTypeSelected,
+                             onTableTypeSelected
+                           }) => (
   <Dropdown>
     <Dropdown.Toggle variant="secondary" className="table-config-dropdown-button">
       Table Types
     </Dropdown.Toggle>
     <Dropdown.Menu>
       {
-        tableTypes.map(tableType =>
-          <Dropdown.Item onSelect={() => onTableTypeSelected(tableType)} key={tableType.name}>
-            <div className="table-type-option">
-              <TableIcon table={buildTable(tableType, table.tableColor)}/>
-              <div className="name">
-                {camelCaseToDisplay(tableType.name)}
-              </div>
-            </div>
-          </Dropdown.Item>
-        )
+        buildDropdownMenu(
+          tableTypes,
+          table,
+          onCreateNewTableTypeSelected,
+          onTableTypeSelected)
       }
     </Dropdown.Menu>
   </Dropdown>
@@ -48,6 +69,7 @@ const mapStateToProps = (state, ownProps) => ({
 export default connect(
   mapStateToProps,
   {
+    onCreateNewTableTypeSelected: onOpenTableTypeForm,
     onTableTypeSelected
   }
 )(TableTypeDropdown);

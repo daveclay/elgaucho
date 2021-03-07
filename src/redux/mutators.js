@@ -72,6 +72,36 @@ export const showTableForm = (state, action) => {
   tableForm.table = table
 }
 
-export const hideTableForm = (state, action) => {
+export const hideTableForm = state => {
   state.tableForm.visible = false
+}
+
+export const updateTableTypeName = (state, action) => {
+  state.tableTypeForm.tableType.name = action.name
+}
+
+export const saveTableTypeForm = state => {
+  const stateSelector = newStateSelector(state)
+  const tableForm = state.tableForm
+  if (tableForm.table.isNew) {
+    console.log("TODO: No adding new tables yet")
+  } else {
+    const table = stateSelector.findTableForId(tableForm.table.id)
+    Object.assign(table, tableForm.table)
+  }
+}
+
+export const showTableTypeForm = (state, action) => {
+  const tableTypeForm = state.tableTypeForm
+  tableTypeForm.visible = true
+  const tableType = action.tableType || {
+    name: "New",
+    isNew: true,
+    style: {}
+  }
+  tableTypeForm.tableType = tableType
+}
+
+export const hideTableTypeForm = state => {
+  state.tableTypeForm.visible = false
 }

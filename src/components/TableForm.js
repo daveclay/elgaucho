@@ -9,6 +9,7 @@ import TableTypeDropdown from "./TableTypeDropdown";
 import TableColorDropdown from "./TableColorDropdown";
 import {Button, Col, Container, Form, Modal, Row} from "react-bootstrap";
 import TableIcon from "./TableIcon";
+import TableTypeForm from "./TableTypeForm";
 
 const tableNameDisplay = (table) => {
   if (table.isNew) {
@@ -52,6 +53,7 @@ const TableForm = ({
               </Col>
             </Row>
           </Container>
+          <TableTypeForm />
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={onCloseTableForm}>

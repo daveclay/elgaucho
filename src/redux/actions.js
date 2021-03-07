@@ -34,4 +34,19 @@ export const onSaveTableForm = () => ({
   type: 'onSaveTableForm'
 })
 
+export const onOpenTableTypeForm = () => ({
+	type: 'onOpenTableTypeForm'
+})
 
+export const onUpdateTableTypeName = (name) => ({
+	type: 'onUpdateTableTypeName',
+  name
+})
+
+export const onCloseTableTypeForm = () => ({
+	type: 'onCloseTableTypeForm'
+})
+
+export const onSaveTableTypeForm = () => ({
+	type: 'onSaveTableTypeForm'
+})

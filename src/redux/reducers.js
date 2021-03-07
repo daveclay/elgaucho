@@ -7,7 +7,7 @@ import {
   setTableFormColor,
   setTableFormType,
   showTableForm,
-  saveTableForm, updateTableName
+  saveTableForm, updateTableName, updateTableTypeName, saveTableTypeForm, hideTableTypeForm, showTableTypeForm
 } from "./mutators"
 
 export const initialState = {
@@ -439,6 +439,13 @@ export const initialState = {
     table: {
       style: {}
     }
+  },
+  tableTypeForm: {
+    visible: false,
+    tableType: {
+      name: "New",
+      style: {}
+    }
   }
 }
 
@@ -457,6 +464,11 @@ const onCloseTableForm = mutatorToReducer(hideTableForm)
 const onSaveTableForm = mutatorsToReducer(saveTableForm, hideTableForm)
 const onUpdateTableName = mutatorsToReducer(updateTableName)
 
+const onOpenTableTypeForm = mutatorToReducer(showTableTypeForm)
+const onCloseTableTypeForm = mutatorToReducer(hideTableTypeForm)
+const onSaveTableTypeForm = mutatorsToReducer(saveTableTypeForm, hideTableTypeForm)
+const onUpdateTableTypeName = mutatorsToReducer(updateTableTypeName)
+
 map('init', init)
 map('onTableTypeSelected', onTableTypeSelected)
 map('onTableColorSelected', onTableColorSelected)
@@ -464,5 +476,9 @@ map('onOpenTableForm', onOpenTableForm)
 map('onUpdateTableName', onUpdateTableName)
 map('onSaveTableForm', onSaveTableForm)
 map('onCloseTableForm', onCloseTableForm)
+map('onOpenTableTypeForm', onOpenTableTypeForm)
+map('onUpdateTableTypeName', onUpdateTableTypeName)
+map('onSaveTableTypeForm', onSaveTableTypeForm)
+map('onCloseTableTypeForm', onCloseTableTypeForm)
 
 export const rootReducer = reducer
