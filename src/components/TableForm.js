@@ -8,6 +8,14 @@ import TableColorDropdown from "./TableColorDropdown";
 import {Button, Modal} from "react-bootstrap";
 import TableIcon from "./TableIcon";
 
+const tableNameDisplay = (table) => {
+  if (table.isNew) {
+    return "New Table"
+  } else {
+    return `Table ${table.name}`
+  }
+}
+
 const TableForm = ({
                     tableForm,
                     onOpenTableForm,
@@ -19,7 +27,7 @@ const TableForm = ({
       </div>
       <Modal show={tableForm.visible} onHide={onCloseTableForm}>
         <Modal.Header closeButton>
-          <Modal.Title>Table Options</Modal.Title>
+          <Modal.Title>{tableNameDisplay(tableForm.table)}</Modal.Title>
         </Modal.Header>
         <Modal.Body className="table-form-modal">
           <div>

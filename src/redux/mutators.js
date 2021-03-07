@@ -48,7 +48,10 @@ export const hideTableForm = (state, action) => {
 export const showTableForm = (state, action) => {
   state.tableForm.visible = true
   state.tableForm.table = action.table || buildTable(
-    { name: "New" },
+    {
+      name: "New",
+      isNew: true
+    },
     state.tableForm.tableType,
     state.tableForm.tableColor
   )
