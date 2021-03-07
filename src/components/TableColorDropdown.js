@@ -6,23 +6,19 @@ import TableIcon from "./TableIcon";
 import {buildTable} from "../tableUtils";
 import {camelCaseToDisplay} from "../utils";
 
-const TableTypeDropdown = ({
-  tableTypes,
-  defaultTableColor
+const TableColorDropdown = ({
+  tableColors
 }) => (
   <Dropdown>
     <Dropdown.Toggle variant="secondary">
-      Table Types
+      Color
     </Dropdown.Toggle>
     <Dropdown.Menu>
       {
-        tableTypes.map(tableType =>
-          <Dropdown.Item href="#/action-1" key={tableType.name}>
-            <div className="table-type-option">
-              <TableIcon table={buildTable({name: tableType.name}, tableType, defaultTableColor)}/>
-              <div className="name">
-                {camelCaseToDisplay(tableType.name)}
-              </div>
+        tableColors.map(tableColor=>
+          <Dropdown.Item href="#/action-1" key={tableColor.name}>
+            <div className="name" style={tableColor.style}>
+              {camelCaseToDisplay(tableColor.name)}
             </div>
           </Dropdown.Item>
         )
@@ -33,12 +29,11 @@ const TableTypeDropdown = ({
 
 const mapStateToProps = (state, ownProps) => ({
   ownProps,
-  tableTypes: newStateSelector(state).getTableTypes(),
-  defaultTableColor: state.tableColors[0]
+  tableColors: newStateSelector(state).getTableColors()
 })
 
 export default connect(
   mapStateToProps,
   {
   }
-)(TableTypeDropdown);
+)(TableColorDropdown);
