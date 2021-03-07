@@ -1,5 +1,5 @@
 import {map, reducer} from "./utils/redux-map";
-import {mutatorToReducer, ArrayUtils, reduceAll, mutatorsToReducer} from "../utils";
+import {mutatorToReducer, mutatorsToReducer} from "../utils";
 import {
   defaultTableForm,
   hideTableForm,

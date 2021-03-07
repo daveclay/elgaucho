@@ -1,10 +1,7 @@
 import {
-  ArrayUtils, mutatorToReducer
-} from "../utils";
-import {
   newStateSelector
 } from "../selectors/selectors";
-import {buildTableStyle, defaultStyle} from "../tableUtils";
+import {defaultStyle} from "../tableUtils";
 
 /************************************************
  * Mutators

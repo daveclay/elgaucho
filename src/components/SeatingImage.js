@@ -1,5 +1,5 @@
-const SeatingImage = ({}) => (
-    <img src="./gaucho-seating-blank.png" id="blank-seating"/>
+const SeatingImage = () => (
+    <img src="./gaucho-seating-blank.png" id="blank-seating" alt="Seating Chart"/>
 )
 
 export default SeatingImage
