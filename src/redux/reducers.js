@@ -395,6 +395,7 @@ export const initialState = {
       name: "203"
     }
   ],
+  tables: [],
   tableForm: {
     visible: false,
     tableType: null,
