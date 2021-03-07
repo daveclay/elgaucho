@@ -1,13 +1,13 @@
 import { connect } from "react-redux";
 import {
 } from "../redux/actions"
-import Draggable from 'react-draggable'; // The default
+import Draggable from 'react-draggable';
+import TableIcon from "./TableIcon"; // The default
 
 const Table = ({table}) => (
     <Draggable positionOffset={{x: table.x, y: table.y}}>
         <div className="table-container">
-            <div className="table" style={table.style}>
-            </div>
+            <TableIcon table={table}/>
             <div className="table-content">
                 <span className="table-id">{table.name}</span>
                 <div className="form-content">

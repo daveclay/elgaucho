@@ -30,7 +30,10 @@ img {
     position: absolute;
 }
 
-/* table types */
+.table-container:hover {
+    cursor: pointer;
+}
+
 .table-content {
     text-align: center;
     display: block;
@@ -56,6 +59,10 @@ img {
     display: inline-block;
 }
 
+.table-type-option {
+    position: relative;
+}
+
 #table-config {
     display: inline-block;
 }
@@ -65,5 +72,12 @@ img {
 }
 
 .form-content {
+    display: none;
+}
+
+#id {
+    margin-left: 100px;
+    background-color: #333333;
+    color: gray;
     display: none;
 }

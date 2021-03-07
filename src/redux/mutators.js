@@ -2,25 +2,21 @@ import {
   ArrayUtils
 } from "../utils";
 import {
+  newStateSelector
 } from "../selectors/selectors";
+import {buildTable} from "../tableUtils";
 
 /************************************************
  * Mutators
  ************************************************/
-const defaultStyle = {
-  style: {}
-}
 
 export const resolveTableReferences = state => {
+  const stateSelector = newStateSelector(state)
   state.tables = state.tableConfigs.map(config=> {
-    const tableType = state.tableTypes[config.typeId] || defaultStyle
-    const tableColor = state.tableColors[config.colorId] || defaultStyle
-    const mixin = state.tableTypeMixins[tableType.mixin] || defaultStyle
-    const style = Object.assign({}, mixin.style, tableType.style, tableColor.style)
-    return {
-      ...config,
-      style: style
-    }
+    const tableType = stateSelector.findTableTypeForName(config.typeId)
+    const tableColor = stateSelector.findTableColorForName(config.colorId)
+    const mixin = stateSelector.findTableTypeMixinForName(tableType.mixinTableTypeId)
+    return buildTable(config, tableType, tableColor, mixin)
   })
 }
 

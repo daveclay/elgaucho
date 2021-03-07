@@ -5,122 +5,136 @@ import {resolveTableReferences} from "./mutators"
 import {} from "../selectors/selectors"
 
 export const initialState = {
-  // TODO: mixin styles for common types like "diamond"
-  tableTypeMixins: {
-    diamond: {
+  tableTypeMixins: [
+    {
+      name: "diamond",
       style: {
         transform: "rotate(45deg)",
         borderRadius: "5px",
       }
     }
-  },
-  tableTypes: {
-    tallRectTable: {
+  ],
+  tableTypes: [
+    {
+      name: "tallRectTable",
       style: {
         width: "27px",
         height: "54px",
-        borderRadius: "5px",
-      }
+        borderRadius: "5px"
+      },
     },
-    wideRectTable: {
+    {
+      name: "wideRectTable",
       style: {
         width: "54px",
         height: "27px",
-        borderRadius: "5px",
-      }
+        borderRadius: "5px"
+      },
     },
-    togoTable: {
+    {
+      name: "togoTable",
       style: {
         height: "56px",
         width: "42px",
-        borderRadius: "5px",
-      }
+        borderRadius: "5px"
+      },
     },
-    fireTable: {
+    {
+      name: "fireTable",
       style: {
         width: "68px",
         height: "68px",
         lineHeight: "68px",
-        borderRadius: "50%",
-      }
+        borderRadius: "50%"
+      },
     },
-    smallCircleTable: {
+    {
+      name: "smallCircleTable",
       style: {
         width: "27px",
         height: "27px",
         lineHeight: "27px",
-        borderRadius: "50%",
-      }
+        borderRadius: "50%"
+      },
     },
-    medCircleTable: {
+    {
+      name: "medCircleTable",
       style: {
         width: "42px",
         height: "42px",
         lineHeight: "40px",
-        borderRadius: "50%",
-      }
+        borderRadius: "50%"
+      },
     },
-    smallSquareTable: {
+    {
+      name: "smallSquareTable",
       style: {
         width: "27px",
         height: "27px",
-        borderRadius: "5px",
-      }
+        borderRadius: "5px"
+      },
     },
-    medSquareTable: {
+    {
+      name: "medSquareTable",
       style: {
         width: "34px",
         height: "34px",
-        borderRadius: "5px",
-      }
+        borderRadius: "5px"
+      },
     },
-    largeSquareTable: {
+    {
+      name: "largeSquareTable",
       style: {
         width: "42px",
         height: "42px",
-        borderRadius: "5px",
-      }
+        borderRadius: "5px"
+      },
     },
-    smallDiamondTable: {
-      mixin: "diamond",
+    {
+      name: "smallDiamondTable",
+      mixinTableTypeId: "diamond",
       style: {
         width: "27px",
-        height: "27px",
-      }
+        height: "27px"
+      },
     },
-    largeDiamondTable: {
-      mixin: "diamond",
+    {
+      name: "largeDiamondTable",
+      mixinTableTypeId: "diamond",
       style: {
         width: "32px",
-        height: "32px",
-      }
+        height: "32px"
+      },
     },
-    vipRectTable: {
+    {
+      name: "vipRectTable",
       style: {
         width: "34px",
         height: "68px",
-        borderRadius: "5px",
-      }
-    },
-  },
-
-  tableColors: {
-    blue: {
+        borderRadius: "5px"
+      },
+    }
+  ],
+  tableColors: [
+    {
+      name: "blue",
       style: {
         backgroundColor: "rgb(62, 148, 229)"
       }
     },
-    green: {
+    {
+      name: "green",
       style: {
         backgroundColor: "rgb(71, 180, 152)"
       }
     },
-    white: {
+    {
+      name: "white",
       style: {
         backgroundColor: "rgb(255, 255, 255)"
       }
     }
-  },
+  ],
   tableConfigs: [
     {
       x: 551,
