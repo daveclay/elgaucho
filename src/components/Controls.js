@@ -1,61 +1,22 @@
 import {connect} from "react-redux";
 import {
-  onOpenTableForm,
-  onCloseTableForm,
 } from "../redux/actions"
-import TableTypeDropdown from "./TableTypeDropdown";
-import TableColorDropdown from "./TableColorDropdown";
-import {Button, Modal} from "react-bootstrap";
-import TableIcon from "./TableIcon";
+import TableForm from "./TableForm";
 
-const TableForm = ({
-                    tableForm,
-                    onOpenTableForm,
-                    onCloseTableForm,
-}) => (
+const Controls = ({}) => (
   <div id="controls">
     <button className="btn btn-danger" id="reset">Reset</button>
-    <div id="table-config">
-      <div className="config-option">
-        <Button variant="primary" onClick={onOpenTableForm}>Add Table</Button>
-      </div>
-      <Modal show={tableForm.visible} onHide={onCloseTableForm}>
-        <Modal.Header closeButton>
-          <Modal.Title>Table Options</Modal.Title>
-        </Modal.Header>
-        <Modal.Body className="table-form-modal">
-          <div>
-            <TableTypeDropdown />
-            <TableColorDropdown />
-          </div>
-          <div>
-            <TableIcon table={tableForm.table}/>
-          </div>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={onCloseTableForm}>
-            Cancel
-          </Button>
-          <Button variant="primary" onClick={onCloseTableForm}>
-            Save
-          </Button>
-        </Modal.Footer>
-      </Modal>
-    </div>
-
+    <TableForm/>
     <input type="text" id="coords" readOnly width="8"/>
   </div>
 )
 
 const mapStateToProps = (state, ownProps) => ({
   ownProps,
-  tableForm: state.tableForm
 })
 
 export default connect(
   mapStateToProps,
   {
-    onOpenTableForm,
-    onCloseTableForm
   }
-)(TableForm);
+)(Controls);

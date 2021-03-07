@@ -20,14 +20,6 @@ export const resolveTableReferences = state => {
   })
 }
 
-export const updateTableFormTable = (state) => {
-  state.tableForm.table = buildTable(
-    { name: "New" },
-    state.tableForm.tableType,
-    state.tableForm.tableColor
-  )
-}
-
 export const defaultTableForm = (state) => {
   setTableFormType(state, {
     tableType: state.tableTypes[0]
@@ -38,11 +30,15 @@ export const defaultTableForm = (state) => {
 }
 
 export const setTableFormType = (state, action) => {
-  state.tableForm.tableType = action.tableType
+  const tableForm = state.tableForm
+  tableForm.tableType = action.tableType
+  tableForm.table.style = Object.assign(tableForm.table.style, action.tableType.style)
 }
 
 export const setTableFormColor = (state, action) => {
-  state.tableForm.tableColor = action.tableColor
+  const tableForm = state.tableForm
+  tableForm.tableColor = action.tableColor
+  tableForm.table.style = Object.assign(tableForm.table.style, action.tableColor.style)
 }
 
 export const hideTableForm = (state, action) => {
@@ -51,5 +47,10 @@ export const hideTableForm = (state, action) => {
 
 export const showTableForm = (state, action) => {
   state.tableForm.visible = true
+  state.tableForm.table = action.table || buildTable(
+    { name: "New" },
+    state.tableForm.tableType,
+    state.tableForm.tableColor
+  )
 }
 

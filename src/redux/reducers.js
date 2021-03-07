@@ -7,7 +7,7 @@ import {
   resolveTableReferences,
   setTableFormColor,
   setTableFormType,
-  showTableForm, updateTableFormTable
+  showTableForm
 } from "./mutators"
 import {} from "../selectors/selectors"
 import produce from "immer";
@@ -409,16 +409,13 @@ export const initialState = {
 
 const init = mutatorsToReducer(
   resolveTableReferences,
-  defaultTableForm,
-  updateTableFormTable
+  defaultTableForm
 )
 const onTableTypeSelected = mutatorsToReducer(
   setTableFormType,
-  updateTableFormTable
 )
 const onTableColorSelected = mutatorsToReducer(
   setTableFormColor,
-  updateTableFormTable
 )
 const onOpenTableForm = mutatorToReducer(showTableForm)
 const onCloseTableForm = mutatorToReducer(hideTableForm)
