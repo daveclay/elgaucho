@@ -1,4 +1,4 @@
-const defaultStyle = { style: {} }
+export const defaultStyle = { style: {} }
 
 export function buildTableStyle(tableType = defaultStyle,
                                 tableColor = defaultStyle) {

@@ -29,4 +29,8 @@ export const onCloseTableForm = () => ({
   type: 'onCloseTableForm'
 })
 
+export const onSaveTableForm = () => ({
+  type: 'onSaveTableForm'
+})
+
 

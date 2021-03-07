@@ -2,6 +2,7 @@ import {connect} from "react-redux";
 import {
   onOpenTableForm,
   onCloseTableForm,
+  onSaveTableForm
 } from "../redux/actions"
 import TableTypeDropdown from "./TableTypeDropdown";
 import TableColorDropdown from "./TableColorDropdown";
@@ -17,9 +18,10 @@ const tableNameDisplay = (table) => {
 }
 
 const TableForm = ({
-                    tableForm,
-                    onOpenTableForm,
-                    onCloseTableForm,
+                     tableForm,
+                     onOpenTableForm,
+                     onCloseTableForm,
+                     onSaveTableForm
 }) => (
     <div id="table-form">
       <div className="config-option">
@@ -42,7 +44,7 @@ const TableForm = ({
           <Button variant="secondary" onClick={onCloseTableForm}>
             Cancel
           </Button>
-          <Button variant="primary" onClick={onCloseTableForm}>
+          <Button variant="primary" onClick={onSaveTableForm}>
             Save
           </Button>
         </Modal.Footer>
@@ -59,6 +61,7 @@ export default connect(
   mapStateToProps,
   {
     onOpenTableForm,
-    onCloseTableForm
+    onCloseTableForm,
+    onSaveTableForm
   }
 )(TableForm);

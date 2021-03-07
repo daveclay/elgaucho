@@ -33,6 +33,10 @@ class StateSelector {
   findTableTypeMixinForName(name) {
     return findByName(this.getTableTypeStyleMixins(), name)
   }
+
+  findTableForName(name) {
+    return findByName(this.state.tables, name)
+  }
 }
 
 export const newStateSelector = (state) => new StateSelector(state)

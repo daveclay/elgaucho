@@ -6,7 +6,8 @@ import {
   buildTablesFromConfig,
   setTableFormColor,
   setTableFormType,
-  showTableForm
+  showTableForm,
+  saveTableForm
 } from "./mutators"
 import {} from "../selectors/selectors"
 
@@ -418,11 +419,13 @@ const onTableColorSelected = mutatorsToReducer(
 )
 const onOpenTableForm = mutatorToReducer(showTableForm)
 const onCloseTableForm = mutatorToReducer(hideTableForm)
+const onSaveTableForm = mutatorsToReducer(saveTableForm, hideTableForm)
 
 map('init', init)
 map('onTableTypeSelected', onTableTypeSelected)
 map('onTableColorSelected', onTableColorSelected)
 map('onOpenTableForm', onOpenTableForm)
+map('onSaveTableForm', onSaveTableForm)
 map('onCloseTableForm', onCloseTableForm)
 
 export const rootReducer = reducer
