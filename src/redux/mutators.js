@@ -24,3 +24,7 @@ export const setAddTableFormType = (state, action) => {
   state.addTableForm.tableType = action.tableType
 }
 
+export const setAddTableFormColor = (state, action) => {
+  state.addTableForm.tableColor = action.tableColor
+}
+

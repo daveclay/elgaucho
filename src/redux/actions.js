@@ -13,3 +13,10 @@ export const onTableTypeSelected = (tableType) => (dispatch) => {
   })
 }
 
+export const onTableColorSelected = (tableColor) => (dispatch) => {
+  dispatch({
+    type: 'onTableColorSelected',
+    tableColor
+  })
+}
+

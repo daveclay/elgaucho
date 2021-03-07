@@ -1,7 +1,7 @@
 import * as actions from "./actions"
 import {map, reducer} from "./utils/redux-map";
 import {mutatorToReducer, ArrayUtils, reduceAll} from "../utils";
-import {resolveTableReferences, setAddTableFormType} from "./mutators"
+import {resolveTableReferences, setAddTableFormColor, setAddTableFormType} from "./mutators"
 import {} from "../selectors/selectors"
 import produce from "immer";
 
@@ -398,8 +398,10 @@ export const initialState = {
 
 const init = mutatorToReducer(resolveTableReferences)
 const onTableTypeSelected = mutatorToReducer(setAddTableFormType)
+const onTableColorSelected = mutatorToReducer(setAddTableFormColor)
 
 map('init', init)
 map('onTableTypeSelected', onTableTypeSelected)
+map('onTableColorSelected', onTableColorSelected)
 
 export const rootReducer = reducer

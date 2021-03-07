@@ -1,11 +1,12 @@
 import {connect} from "react-redux";
-import {} from "../redux/actions"
+import { onTableColorSelected } from "../redux/actions"
 import {Dropdown} from "react-bootstrap";
 import {newStateSelector} from "../selectors/selectors";
 import {camelCaseToDisplay} from "../utils";
 
 const TableColorDropdown = ({
-  tableColors
+  tableColors,
+  onTableColorSelected
 }) => (
   <Dropdown>
     <Dropdown.Toggle variant="secondary">
@@ -14,7 +15,7 @@ const TableColorDropdown = ({
     <Dropdown.Menu>
       {
         tableColors.map(tableColor=>
-          <Dropdown.Item href="#/action-1" key={tableColor.name} style={tableColor.style}>
+          <Dropdown.Item onSelect={() => onTableColorSelected(tableColor) } key={tableColor.name} style={tableColor.style}>
             <div className="name">
               {camelCaseToDisplay(tableColor.name)}
             </div>
@@ -33,5 +34,6 @@ const mapStateToProps = (state, ownProps) => ({
 export default connect(
   mapStateToProps,
   {
+    onTableColorSelected
   }
 )(TableColorDropdown);
