@@ -26,11 +26,12 @@ class StateSelector {
     return findByName(this.getTableColors(), name)
   }
 
-  getTableTypeMixins() {
-    return this.state.tableTypeMixins
+  getTableTypeStyleMixins() {
+    return this.state.tableTypeStyleMixins
   }
+
   findTableTypeMixinForName(name) {
-    return findByName(this.getTableTypeMixins(), name)
+    return findByName(this.getTableTypeStyleMixins(), name)
   }
 }
 

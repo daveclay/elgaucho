@@ -12,11 +12,18 @@ import {buildTableStyle} from "../tableUtils";
 
 export const buildTablesFromConfig = state => {
   const stateSelector = newStateSelector(state)
+
+  state.tableTypes.forEach(tableType => {
+    if (tableType.mixinTableStyleTypeId) {
+      const mixin = stateSelector.findTableTypeMixinForName(tableType.mixinTableStyleTypeId)
+      Object.assign(tableType.style, mixin.style)
+    }
+  })
+
   state.tables = state.tableConfigs.map(config=> {
     const tableType = stateSelector.findTableTypeForName(config.typeId)
     const tableColor = stateSelector.findTableColorForName(config.colorId)
-    const mixin = stateSelector.findTableTypeMixinForName(tableType.mixinTableTypeId)
-    const style = buildTableStyle(tableType, tableColor, mixin)
+    const style = buildTableStyle(tableType, tableColor)
     return {
       ...config,
       style

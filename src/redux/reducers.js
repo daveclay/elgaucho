@@ -11,7 +11,7 @@ import {
 import {} from "../selectors/selectors"
 
 export const initialState = {
-  tableTypeMixins: [
+  tableTypeStyleMixins: [
     {
       name: "diamond",
       style: {
@@ -98,7 +98,7 @@ export const initialState = {
     },
     {
       name: "smallDiamondTable",
-      mixinTableTypeId: "diamond",
+      mixinTableStyleTypeId: "diamond",
       style: {
         width: "27px",
         height: "27px"
@@ -106,7 +106,7 @@ export const initialState = {
     },
     {
       name: "largeDiamondTable",
-      mixinTableTypeId: "diamond",
+      mixinTableStyleTypeId: "diamond",
       style: {
         width: "32px",
         height: "32px"
