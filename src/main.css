@@ -64,9 +64,17 @@ img {
     margin: 0 0 0 10px;
 }
 
-#table-config .dropdown-menu {
+.dropdown-menu {
     max-height: 500px;
     overflow-y: scroll;
+}
+
+.add-table-form-modal {
+    background-color: rgb(200, 200, 200);
+}
+
+.table-config-dropdown-button {
+    margin: 10px
 }
 
 .table-type-option {

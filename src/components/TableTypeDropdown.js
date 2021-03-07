@@ -14,7 +14,7 @@ const TableTypeDropdown = ({
   onTableTypeSelected
 }) => (
   <Dropdown>
-    <Dropdown.Toggle variant="secondary">
+    <Dropdown.Toggle variant="secondary" className="table-config-dropdown-button">
       Table Types
     </Dropdown.Toggle>
     <Dropdown.Menu>

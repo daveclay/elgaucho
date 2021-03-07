@@ -21,12 +21,21 @@ export const ArrayUtils = {
   }
 }
 
-export const reduceAll = (state, ...reducers) => {
-  return reducers.reduce((newState, reducer) => reducer(newState), state)
+export const reduceAll = (...reducers) => (state, action) => {
+  return reducers.reduce((newState, reducer) => {
+    console.log(reducer)
+    return reducer(newState, action)
+  }, state)
+}
+
+export const mutatorsToReducer = (...mutators) => {
+  return (origState, action) => {
+    const reducers = mutators.map(mutator => mutatorToReducer(mutator))
+    return reduceAll(...reducers)(origState, action)
+  }
 }
 
 export const mutatorToReducer = (mutator) => (origState, action) => produce(origState, newState => mutator(newState, action))
-
 
 export const camelCaseToDisplay = (text) => {
   const replaced = text.replace( /([A-Z])/g, " $1" );

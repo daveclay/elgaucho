@@ -6,6 +6,7 @@ import {
 import TableTypeDropdown from "./TableTypeDropdown";
 import TableColorDropdown from "./TableColorDropdown";
 import {Button, Modal} from "react-bootstrap";
+import TableIcon from "./TableIcon";
 
 const Controls = ({
                     addTableForm,
@@ -16,25 +17,27 @@ const Controls = ({
     <button className="btn btn-danger" id="reset">Reset</button>
     <div id="table-config">
       <div className="config-option">
-        <TableTypeDropdown />
-      </div>
-      <div className="config-option">
-        <TableColorDropdown />
-      </div>
-      <div className="config-option">
         <Button variant="primary" onClick={onOpenAddTableForm}>Add Table</Button>
       </div>
       <Modal show={addTableForm.visible} onHide={onCloseAddTableForm}>
         <Modal.Header closeButton>
-          <Modal.Title>Modal heading</Modal.Title>
+          <Modal.Title>Add Table</Modal.Title>
         </Modal.Header>
-        <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
+        <Modal.Body className="add-table-form-modal">
+          <div>
+            <TableTypeDropdown />
+            <TableColorDropdown />
+          </div>
+          <div>
+            <TableIcon table={addTableForm.table}/>
+          </div>
+        </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={onCloseAddTableForm}>
-            Close
+            Cancel
           </Button>
           <Button variant="primary" onClick={onCloseAddTableForm}>
-            Save Changes
+            Add
           </Button>
         </Modal.Footer>
       </Modal>

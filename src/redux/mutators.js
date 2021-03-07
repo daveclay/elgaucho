@@ -20,6 +20,23 @@ export const resolveTableReferences = state => {
   })
 }
 
+export const updateAddTableFormTable = (state) => {
+  state.addTableForm.table = buildTable(
+    { name: "New" },
+    state.addTableForm.tableType,
+    state.addTableForm.tableColor
+  )
+}
+
+export const defaultAddTableForm = (state) => {
+  setAddTableFormType(state, {
+    tableType: state.tableTypes[0]
+  })
+  setAddTableFormColor(state, {
+    tableColor: state.tableColors[0]
+  })
+}
+
 export const setAddTableFormType = (state, action) => {
   state.addTableForm.tableType = action.tableType
 }

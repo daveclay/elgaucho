@@ -1,12 +1,13 @@
 import * as actions from "./actions"
 import {map, reducer} from "./utils/redux-map";
-import {mutatorToReducer, ArrayUtils, reduceAll} from "../utils";
+import {mutatorToReducer, ArrayUtils, reduceAll, mutatorsToReducer} from "../utils";
 import {
+  defaultAddTableForm,
   hideAddTableForm,
   resolveTableReferences,
   setAddTableFormColor,
   setAddTableFormType,
-  showAddTableForm
+  showAddTableForm, updateAddTableFormTable
 } from "./mutators"
 import {} from "../selectors/selectors"
 import produce from "immer";
@@ -399,13 +400,26 @@ export const initialState = {
   addTableForm: {
     visible: false,
     tableType: null,
-    tableColor: null
+    tableColor: null,
+    table: {
+      style: {}
+    }
   }
 }
 
-const init = mutatorToReducer(resolveTableReferences)
-const onTableTypeSelected = mutatorToReducer(setAddTableFormType)
-const onTableColorSelected = mutatorToReducer(setAddTableFormColor)
+const init = mutatorsToReducer(
+  resolveTableReferences,
+  defaultAddTableForm,
+  updateAddTableFormTable
+)
+const onTableTypeSelected = mutatorsToReducer(
+  setAddTableFormType,
+  updateAddTableFormTable
+)
+const onTableColorSelected = mutatorsToReducer(
+  setAddTableFormColor,
+  updateAddTableFormTable
+)
 const onOpenAddTableForm = mutatorToReducer(showAddTableForm)
 const onCloseAddTableForm = mutatorToReducer(hideAddTableForm)
 

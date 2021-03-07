@@ -9,7 +9,7 @@ const TableColorDropdown = ({
   onTableColorSelected
 }) => (
   <Dropdown>
-    <Dropdown.Toggle variant="secondary">
+    <Dropdown.Toggle variant="secondary" className="table-config-dropdown-button">
       Color
     </Dropdown.Toggle>
     <Dropdown.Menu>
