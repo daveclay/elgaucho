@@ -2,6 +2,7 @@
  * Selectors
  ************************************************/
 const findByName = (collection, name) => collection.find(item => item.name === name)
+const findById = (collection, id) => collection.find(item => item.id === id)
 
 class StateSelector {
   constructor(state) {
@@ -32,8 +33,8 @@ class StateSelector {
     return findByName(this.getTableTypeStyleMixins(), name)
   }
 
-  findTableForName(name) {
-    return findByName(this.state.tables, name)
+  findTableForId(id) {
+    return findById(this.state.tables, id)
   }
 }
 

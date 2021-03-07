@@ -21,6 +21,11 @@ export const onOpenTableForm = (table) => ({
   table
 })
 
+export const onUpdateTableName = (name) => ({
+  type: 'onUpdateTableName',
+  name
+})
+
 export const onCloseTableForm = () => ({
   type: 'onCloseTableForm'
 })

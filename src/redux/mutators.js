@@ -35,13 +35,17 @@ export const defaultTableForm = (state) => {
   })
 }
 
+export const updateTableName = (state, action) => {
+  state.tableForm.table.name = action.name
+}
+
 export const saveTableForm = state => {
   const stateSelector = newStateSelector(state)
   const tableForm = state.tableForm
   if (tableForm.table.isNew) {
     console.log("TODO: No adding new tables yet")
   } else {
-    const table = stateSelector.findTableForName(tableForm.table.name)
+    const table = stateSelector.findTableForId(tableForm.table.id)
     Object.assign(table, tableForm.table)
   }
 }
