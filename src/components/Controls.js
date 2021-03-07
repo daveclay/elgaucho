@@ -1,10 +1,8 @@
 import {connect} from "react-redux";
 import {} from "../redux/actions"
-import Button from 'react-bootstrap/Button';
-import {Dropdown} from "react-bootstrap";
-import {newStateSelector} from "../selectors/selectors";
 import TableTypeDropdown from "./TableTypeDropdown";
 import TableColorDropdown from "./TableColorDropdown";
+import {Button} from "react-bootstrap";
 
 const Controls = ({}) => (
   <div id="controls">
@@ -17,7 +15,7 @@ const Controls = ({}) => (
         <TableColorDropdown />
       </div>
       <div className="config-option">
-        <button className="btn btn-primary" id="addTable">add</button>
+        <Button variant="primary">Add Table</Button>
       </div>
     </div>
 
