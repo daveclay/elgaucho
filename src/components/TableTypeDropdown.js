@@ -5,17 +5,17 @@ import {
 import {Dropdown} from "react-bootstrap";
 import {newStateSelector} from "../selectors/selectors";
 import TableIcon from "./TableIcon";
-import { buildTableStyle } from "../tableUtils";
 import {camelCaseToDisplay} from "../utils";
 
-const buildTable = (tableType, defaultTableColor) => ({
+const buildTable = (tableType, tableColor) => ({
   name: tableType.name,
-  style: buildTableStyle(tableType, defaultTableColor)
+  tableType,
+  tableColor,
 })
 
 const TableTypeDropdown = ({
   tableTypes,
-  defaultTableColor,
+  table,
   onTableTypeSelected
 }) => (
   <Dropdown>
@@ -27,7 +27,7 @@ const TableTypeDropdown = ({
         tableTypes.map(tableType =>
           <Dropdown.Item onSelect={() => onTableTypeSelected(tableType)} key={tableType.name}>
             <div className="table-type-option">
-              <TableIcon table={buildTable(tableType, defaultTableColor)}/>
+              <TableIcon table={buildTable(tableType, table.tableColor)}/>
               <div className="name">
                 {camelCaseToDisplay(tableType.name)}
               </div>
@@ -42,7 +42,7 @@ const TableTypeDropdown = ({
 const mapStateToProps = (state, ownProps) => ({
   ownProps,
   tableTypes: newStateSelector(state).getTableTypes(),
-  defaultTableColor: state.tableColors[0]
+  table: state.tableForm.table
 })
 
 export default connect(

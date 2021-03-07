@@ -1,10 +1,10 @@
 import { connect } from "react-redux";
-import {
-} from "../redux/actions"
 import {buildTableStyle} from "../tableUtils";
 
-const Table = ({table}) => (
-    <div className="table" style={buildTableStyle(table.tableType, table.tableColor)}/>
+const TableIcon = ({table}) => (
+    <div className="table" style={
+      buildTableStyle(table.tableType, table.tableColor)
+    }/>
 )
 
 const mapStateToProps = (state, ownProps) => ({
@@ -13,6 +13,4 @@ const mapStateToProps = (state, ownProps) => ({
 
 export default connect(
     mapStateToProps,
-    {
-    }
-)(Table);
+)(TableIcon);

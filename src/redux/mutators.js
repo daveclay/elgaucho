@@ -1,7 +1,6 @@
 import {
   newStateSelector
 } from "../selectors/selectors";
-import {defaultStyle} from "../tableUtils";
 
 /************************************************
  * Mutators
@@ -40,33 +39,33 @@ export const saveTableForm = state => {
   const stateSelector = newStateSelector(state)
   const tableForm = state.tableForm
   if (tableForm.table.isNew) {
-    console.log("No adding new tables yet")
+    console.log("TODO: No adding new tables yet")
   } else {
     const table = stateSelector.findTableForName(tableForm.table.name)
-    table.tableType = tableForm.tableType
-    table.tableColor = tableForm.tableColor
+    Object.assign(table, tableForm.table)
   }
 }
 
 export const setTableFormType = (state, action) => {
   const tableForm = state.tableForm
-  tableForm.tableType = action.tableType
+  tableForm.table.tableType = action.tableType
 }
 
 export const setTableFormColor = (state, action) => {
   const tableForm = state.tableForm
-  tableForm.tableColor = action.tableColor
+  tableForm.table.tableColor = action.tableColor
 }
 
 export const showTableForm = (state, action) => {
   const tableForm = state.tableForm
   tableForm.visible = true
-  tableForm.tableType = action.table.tableType || defaultStyle
-  tableForm.tableColor = action.table.tableColor || defaultStyle
-  tableForm.table = action.table || {
+  const table = action.table || {
     name: "New",
     isNew: true,
+    tableType: state.tableTypes[0],
+    tableColor: state.tableColors[0]
   }
+  tableForm.table = table
 }
 
 export const hideTableForm = (state, action) => {

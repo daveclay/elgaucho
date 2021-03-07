@@ -6,7 +6,7 @@ import {
 } from "../redux/actions"
 import TableTypeDropdown from "./TableTypeDropdown";
 import TableColorDropdown from "./TableColorDropdown";
-import {Button, Modal} from "react-bootstrap";
+import {Button, Col, Container, Modal, Row} from "react-bootstrap";
 import TableIcon from "./TableIcon";
 
 const tableNameDisplay = (table) => {
@@ -32,13 +32,20 @@ const TableForm = ({
           <Modal.Title>{tableNameDisplay(tableForm.table)}</Modal.Title>
         </Modal.Header>
         <Modal.Body className="table-form-modal">
-          <div>
-            <TableTypeDropdown />
-            <TableColorDropdown />
-          </div>
-          <div>
-            <TableIcon table={tableForm.table}/>
-          </div>
+          <Container>
+            <Row>
+              <Col>
+                <TableTypeDropdown />
+                <TableColorDropdown />
+              </Col>
+              <Col>
+                <TableIcon table={tableForm.table}/>
+              </Col>
+              <Col>
+                Hello
+              </Col>
+            </Row>
+          </Container>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={onCloseTableForm}>

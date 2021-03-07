@@ -67,6 +67,11 @@ img {
 .dropdown-menu {
     max-height: 500px;
     overflow-y: scroll;
+    background-color: rgb(200, 200, 200);
+}
+
+.dropdown-menu .table {
+    border: 1px solid #333333;
 }
 
 .table-form-modal {
