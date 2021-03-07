@@ -10,9 +10,15 @@ const Controls = ({}) => (
   <div id="controls">
     <button className="btn btn-danger" id="reset">Reset</button>
     <div id="table-config">
-      <TableTypeDropdown />
-      <TableColorDropdown />
-      <button className="btn btn-primary" id="addTable">add</button>
+      <div className="config-option">
+        <TableTypeDropdown />
+      </div>
+      <div className="config-option">
+        <TableColorDropdown />
+      </div>
+      <div className="config-option">
+        <button className="btn btn-primary" id="addTable">add</button>
+      </div>
     </div>
 
     <input type="text" id="coords" readOnly width="8"/>

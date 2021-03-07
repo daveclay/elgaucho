@@ -2,8 +2,6 @@ import {connect} from "react-redux";
 import {} from "../redux/actions"
 import {Dropdown} from "react-bootstrap";
 import {newStateSelector} from "../selectors/selectors";
-import TableIcon from "./TableIcon";
-import {buildTable} from "../tableUtils";
 import {camelCaseToDisplay} from "../utils";
 
 const TableColorDropdown = ({
@@ -16,8 +14,8 @@ const TableColorDropdown = ({
     <Dropdown.Menu>
       {
         tableColors.map(tableColor=>
-          <Dropdown.Item href="#/action-1" key={tableColor.name}>
-            <div className="name" style={tableColor.style}>
+          <Dropdown.Item href="#/action-1" key={tableColor.name} style={tableColor.style}>
+            <div className="name">
               {camelCaseToDisplay(tableColor.name)}
             </div>
           </Dropdown.Item>
