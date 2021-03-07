@@ -1,16 +1,14 @@
-import * as actions from "./actions"
 import {map, reducer} from "./utils/redux-map";
 import {mutatorToReducer, ArrayUtils, reduceAll, mutatorsToReducer} from "../utils";
 import {
   defaultTableForm,
   hideTableForm,
-  resolveTableReferences,
+  buildTablesFromConfig,
   setTableFormColor,
   setTableFormType,
   showTableForm
 } from "./mutators"
 import {} from "../selectors/selectors"
-import produce from "immer";
 
 export const initialState = {
   tableTypeMixins: [
@@ -408,7 +406,7 @@ export const initialState = {
 }
 
 const init = mutatorsToReducer(
-  resolveTableReferences,
+  buildTablesFromConfig,
   defaultTableForm
 )
 const onTableTypeSelected = mutatorsToReducer(

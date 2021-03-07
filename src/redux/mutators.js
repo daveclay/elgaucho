@@ -4,19 +4,23 @@ import {
 import {
   newStateSelector
 } from "../selectors/selectors";
-import {buildTable} from "../tableUtils";
+import {buildTableStyle} from "../tableUtils";
 
 /************************************************
  * Mutators
  ************************************************/
 
-export const resolveTableReferences = state => {
+export const buildTablesFromConfig = state => {
   const stateSelector = newStateSelector(state)
   state.tables = state.tableConfigs.map(config=> {
     const tableType = stateSelector.findTableTypeForName(config.typeId)
     const tableColor = stateSelector.findTableColorForName(config.colorId)
     const mixin = stateSelector.findTableTypeMixinForName(tableType.mixinTableTypeId)
-    return buildTable(config, tableType, tableColor, mixin)
+    const style = buildTableStyle(tableType, tableColor, mixin)
+    return {
+      ...config,
+      style
+    }
   })
 }
 
@@ -41,19 +45,16 @@ export const setTableFormColor = (state, action) => {
   tableForm.table.style = Object.assign(tableForm.table.style, action.tableColor.style)
 }
 
+export const showTableForm = (state, action) => {
+  const tableForm = state.tableForm
+  tableForm.visible = true
+  tableForm.table = action.table || {
+    name: "New",
+    isNew: true,
+    style: buildTableStyle(tableForm.tableType, tableForm.tableColor)
+  }
+}
+
 export const hideTableForm = (state, action) => {
   state.tableForm.visible = false
 }
-
-export const showTableForm = (state, action) => {
-  state.tableForm.visible = true
-  state.tableForm.table = action.table || buildTable(
-    {
-      name: "New",
-      isNew: true
-    },
-    state.tableForm.tableType,
-    state.tableForm.tableColor
-  )
-}
-
