@@ -27,10 +27,8 @@ export const reduceAll = (state, ...reducers) => {
 
 export const mutatorToReducer = (mutator) => (oldState, action) => produce(oldState, newState => mutator(newState, action))
 
-export const newFromTemplate = (template) => {
-  let element = template.cloneNode(true);
-  element.classList.remove("hidden");
-  element.attributes.removeNamedItem("id");
-  return element;
-};
+export const camelCaseToDisplay = (text) => {
+  const replaced = text.replace( /([A-Z])/g, " $1" );
+  return replaced.charAt(0).toUpperCase() + replaced.slice(1);
+}
 

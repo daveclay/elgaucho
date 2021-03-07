@@ -59,8 +59,22 @@ img {
     display: inline-block;
 }
 
+#table-config .dropdown-menu {
+    max-height: 500px;
+    overflow-y: scroll;
+}
+
 .table-type-option {
     position: relative;
+    width: 200px;
+}
+
+.table-type-option .table {
+    display: inline-block;
+}
+
+.table-type-option .name {
+    float: right;
 }
 
 #table-config {

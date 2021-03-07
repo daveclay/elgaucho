@@ -4,6 +4,7 @@ import {Dropdown} from "react-bootstrap";
 import {newStateSelector} from "../selectors/selectors";
 import TableIcon from "./TableIcon";
 import {buildTable} from "../tableUtils";
+import {camelCaseToDisplay} from "../utils";
 
 const Controls = ({
   tableTypes,
@@ -19,8 +20,8 @@ const Controls = ({
           <Dropdown.Item href="#/action-1">
             <div className="table-type-option">
               <TableIcon table={buildTable({name: tableType.name}, tableType, defaultTableColor)}/>
-              <div className="table-content">
-                {tableType.name}
+              <div className="name">
+                {camelCaseToDisplay(tableType.name)}
               </div>
             </div>
           </Dropdown.Item>
