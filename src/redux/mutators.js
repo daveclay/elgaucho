@@ -1,5 +1,5 @@
 import {
-  ArrayUtils
+  ArrayUtils, mutatorToReducer
 } from "../utils";
 import {
   newStateSelector
@@ -26,5 +26,13 @@ export const setAddTableFormType = (state, action) => {
 
 export const setAddTableFormColor = (state, action) => {
   state.addTableForm.tableColor = action.tableColor
+}
+
+export const hideAddTableForm = (state, action) => {
+  state.addTableForm.visible = false
+}
+
+export const showAddTableForm = (state, action) => {
+  state.addTableForm.visible = true
 }
 
