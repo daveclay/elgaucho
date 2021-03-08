@@ -50,3 +50,9 @@ export const onCloseTableTypeForm = () => ({
 export const onSaveTableTypeForm = () => ({
 	type: 'onSaveTableTypeForm'
 })
+
+export const onAdjustTableSize = (width, height) => ({
+  type: 'onAdjustTableSize',
+  width,
+  height
+})

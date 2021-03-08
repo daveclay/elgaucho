@@ -7,7 +7,13 @@ import {
   setTableFormColor,
   setTableFormType,
   showTableForm,
-  saveTableForm, updateTableName, updateTableTypeName, saveTableTypeForm, hideTableTypeForm, showTableTypeForm
+  saveTableForm,
+  updateTableName,
+  updateTableTypeName,
+  saveTableTypeForm,
+  hideTableTypeForm,
+  showTableTypeForm,
+  adjustTableSize
 } from "./mutators"
 
 export const initialState = {
@@ -24,32 +30,32 @@ export const initialState = {
     {
       name: "tallRectTable",
       style: {
-        width: "27px",
-        height: "54px",
+        width: 27,
+        height: 54,
         borderRadius: "5px"
       },
     },
     {
       name: "wideRectTable",
       style: {
-        width: "54px",
-        height: "27px",
+        width: 54,
+        height: 27,
         borderRadius: "5px"
       },
     },
     {
       name: "togoTable",
       style: {
-        height: "56px",
-        width: "42px",
+        height: 56,
+        width: 42,
         borderRadius: "5px"
       },
     },
     {
       name: "fireTable",
       style: {
-        width: "68px",
-        height: "68px",
+        width: 68,
+        height: 68,
         lineHeight: "68px",
         borderRadius: "50%"
       },
@@ -57,8 +63,8 @@ export const initialState = {
     {
       name: "smallCircleTable",
       style: {
-        width: "27px",
-        height: "27px",
+        width: 27,
+        height: 27,
         lineHeight: "27px",
         borderRadius: "50%"
       },
@@ -66,8 +72,8 @@ export const initialState = {
     {
       name: "medCircleTable",
       style: {
-        width: "42px",
-        height: "42px",
+        width: 42,
+        height: 42,
         lineHeight: "40px",
         borderRadius: "50%"
       },
@@ -75,24 +81,24 @@ export const initialState = {
     {
       name: "smallSquareTable",
       style: {
-        width: "27px",
-        height: "27px",
+        width: 27,
+        height: 27,
         borderRadius: "5px"
       },
     },
     {
       name: "medSquareTable",
       style: {
-        width: "34px",
-        height: "34px",
+        width: 34,
+        height: 34,
         borderRadius: "5px"
       },
     },
     {
       name: "largeSquareTable",
       style: {
-        width: "42px",
-        height: "42px",
+        width: 42,
+        height: 42,
         borderRadius: "5px"
       },
     },
@@ -100,23 +106,23 @@ export const initialState = {
       name: "smallDiamondTable",
       mixinTableStyleTypeId: "diamond",
       style: {
-        width: "27px",
-        height: "27px"
+        width: 27,
+        height: 27
       },
     },
     {
       name: "largeDiamondTable",
       mixinTableStyleTypeId: "diamond",
       style: {
-        width: "32px",
-        height: "32px"
+        width: 32,
+        height: 32
       },
     },
     {
       name: "vipRectTable",
       style: {
-        width: "34px",
-        height: "68px",
+        width: 34,
+        height: 68,
         borderRadius: "5px"
       },
     }
@@ -447,8 +453,8 @@ export const initialState = {
       isNew: true,
       name: "New",
       style: {
-        width: "30px",
-        height: "30px",
+        width: 30,
+        height: 30,
         backgroundColor: "rgb(40, 40, 40)",
         borderRadius: "5px"
       }
@@ -475,6 +481,7 @@ const onOpenTableTypeForm = mutatorToReducer(showTableTypeForm)
 const onCloseTableTypeForm = mutatorToReducer(hideTableTypeForm)
 const onSaveTableTypeForm = mutatorsToReducer(saveTableTypeForm, hideTableTypeForm)
 const onUpdateTableTypeName = mutatorsToReducer(updateTableTypeName)
+const onAdjustTableSize = mutatorsToReducer(adjustTableSize)
 
 map('init', init)
 map('onTableTypeSelected', onTableTypeSelected)
@@ -487,5 +494,6 @@ map('onOpenTableTypeForm', onOpenTableTypeForm)
 map('onUpdateTableTypeName', onUpdateTableTypeName)
 map('onSaveTableTypeForm', onSaveTableTypeForm)
 map('onCloseTableTypeForm', onCloseTableTypeForm)
+map('onAdjustTableSize', onAdjustTableSize)
 
 export const rootReducer = reducer

@@ -100,3 +100,8 @@ export const showTableTypeForm = (state, action) => {
 export const hideTableTypeForm = state => {
   state.tableTypeForm.visible = false
 }
+
+export const adjustTableSize = (state, action) => {
+  state.tableTypeForm.tableType.style.width = action.width
+  state.tableTypeForm.tableType.style.height = action.height
+}

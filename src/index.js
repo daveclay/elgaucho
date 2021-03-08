@@ -6,6 +6,7 @@ import store from './redux/store'
 import App from './components/App'
 
 import {
+    onOpenTableForm, onOpenTableTypeForm
 } from "./redux/actions";
 
 const rootElement = document.getElementById('root')
@@ -16,18 +17,23 @@ ReactDOM.render(
     rootElement
 )
 
-const steps = []
+const steps = [
+    () => onOpenTableForm(),
+    () => onOpenTableTypeForm(),
+]
+
 let currentStepIndex = 0;
 let runStep = () => {
     if (currentStepIndex < steps.length) {
         console.log(steps[currentStepIndex])
         store.dispatch(steps[currentStepIndex]());
         currentStepIndex++;
+    } else {
         clearInterval(intervalId);
     }
 }
 
-let intervalId = setInterval(() => runStep(), 100)
+let intervalId = setInterval(() => runStep(), 500)
 
 
 

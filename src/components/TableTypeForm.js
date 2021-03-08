@@ -3,7 +3,8 @@ import {
   onOpenTableTypeForm,
   onUpdateTableTypeName,
   onCloseTableTypeForm,
-  onSaveTableTypeForm
+  onSaveTableTypeForm,
+  onAdjustTableSize
 } from "../redux/actions"
 import {Button, Col, Container, Form, Modal, Row} from "react-bootstrap";
 import TableIcon from "./TableIcon";
@@ -16,22 +17,53 @@ const tableNameDisplay = (tableType) => {
   }
 }
 
+const foo = (tableTypeForm) => {
+  console.log(tableTypeForm.tableType.style.height)
+  return tableTypeForm.tableType.style.height
+}
+
 const TableTypeForm = ({
-                     tableTypeForm,
-                     onUpdateTableTypeName,
-                     onCloseTableTypeForm,
-                     onSaveTableTypeForm
-}) => (
-    <div id="table-form">
-      <Modal show={tableTypeForm.visible} onHide={onCloseTableTypeForm}>
-        <Modal.Header closeButton>
-          <Modal.Title>{tableNameDisplay(tableTypeForm.tableType)}</Modal.Title>
-        </Modal.Header>
-        <Modal.Body className="table-form-modal">
+                         tableTypeForm,
+                         onUpdateTableTypeName,
+                         onCloseTableTypeForm,
+                         onSaveTableTypeForm,
+                         onAdjustTableSize
+                       }) => (
+  <div id="table-form">
+    <Modal show={tableTypeForm.visible} onHide={onCloseTableTypeForm}>
+      <Modal.Header closeButton>
+        <Modal.Title>{tableNameDisplay(tableTypeForm.tableType)}</Modal.Title>
+      </Modal.Header>
+      <Modal.Body className="table-form-modal">
+        <Form>
           <Container>
             <Row>
               <Col>
-                Name
+                <Form.Group controlId="name">
+                  <Form.Label>Name</Form.Label>
+                  <Form.Control type="text"
+                                value={tableTypeForm.tableType.name}
+                                onChange={(e) =>
+                                  onUpdateTableTypeName(e.target.value)}/>
+                </Form.Group>
+                <Form.Group controlId="width">
+                  <Form.Label>Width</Form.Label>
+                  <Form.Control type="range"
+                                value={tableTypeForm.tableType.style.width}
+                                min={10}
+                                max={200}
+                                onChange={(e) =>
+                                  onAdjustTableSize(e.target.value, tableTypeForm.tableType.style.height) }/>
+                </Form.Group>
+                <Form.Group controlId="height">
+                  <Form.Label>Height</Form.Label>
+                  <Form.Control type="range"
+                                value={foo(tableTypeForm)}
+                                min={10}
+                                max={200}
+                                onChange={(e) =>
+                                  onAdjustTableSize(tableTypeForm.tableType.style.width, e.target.value) }/>
+                </Form.Group>
               </Col>
               <Col>
                 <TableIcon table={{
@@ -39,26 +71,20 @@ const TableTypeForm = ({
                   tableType: tableTypeForm.tableType
                 }}/>
               </Col>
-              <Col>
-                <Form>
-                  <Form.Control type="text"
-                                value={tableTypeForm.tableType.name}
-                                onChange={(e) => onUpdateTableTypeName(e.target.value)}/>
-                </Form>
-              </Col>
             </Row>
           </Container>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={onCloseTableTypeForm}>
-            Cancel
-          </Button>
-          <Button variant="primary" onClick={onSaveTableTypeForm}>
-            Save
-          </Button>
-        </Modal.Footer>
-      </Modal>
-    </div>
+        </Form>
+      </Modal.Body>
+      <Modal.Footer>
+        <Button variant="secondary" onClick={onCloseTableTypeForm}>
+          Cancel
+        </Button>
+        <Button variant="primary" onClick={onSaveTableTypeForm}>
+          Save
+        </Button>
+      </Modal.Footer>
+    </Modal>
+  </div>
 )
 
 const mapStateToProps = (state, ownProps) => ({
@@ -72,6 +98,7 @@ export default connect(
     onOpenTableTypeForm,
     onUpdateTableTypeName,
     onCloseTableTypeForm,
-    onSaveTableTypeForm
+    onSaveTableTypeForm,
+    onAdjustTableSize
   }
 )(TableTypeForm);

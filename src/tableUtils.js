@@ -2,6 +2,10 @@ export const defaultStyle = { style: {} }
 
 export function buildTableStyle(tableType = defaultStyle,
                                 tableColor = defaultStyle) {
-
-  return Object.assign({}, tableType.style, tableColor.style)
+  const translatedStyle = {
+    ...tableType.style,
+    width: `${tableType.style.width}px`,
+    height: `${tableType.style.height}px`
+  }
+  return Object.assign({}, translatedStyle, tableColor.style)
 }
