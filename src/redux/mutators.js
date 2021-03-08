@@ -48,7 +48,11 @@ export const saveTableForm = state => {
     const table = stateSelector.findTableForId(tableForm.table.id)
     Object.assign(table, tableForm.table)
   } else {
-    console.log("TODO: No adding new tables yet")
+    tableForm.table.id = Date.now()
+    tableForm.table.x = 20
+    tableForm.table.y = 100
+    state.tables.push(tableForm.table)
+    tableForm.table = newTable(state)
   }
 }
 
