@@ -44,11 +44,11 @@ export const updateTableName = (state, action) => {
 export const saveTableForm = state => {
   const stateSelector = newStateSelector(state)
   const tableForm = state.tableForm
-  if (tableForm.table.isNew) {
-    console.log("TODO: No adding new tables yet")
-  } else {
+  if (tableForm.table.id) {
     const table = stateSelector.findTableForId(tableForm.table.id)
     Object.assign(table, tableForm.table)
+  } else {
+    console.log("TODO: No adding new tables yet")
   }
 }
 
@@ -83,11 +83,11 @@ export const updateTableTypeName = (state, action) => {
 export const saveTableTypeForm = state => {
   const stateSelector = newStateSelector(state)
   const tableTypeForm = state.tableTypeForm
-  if (tableTypeForm.tableType.isNew) {
-    state.tableTypes.push(tableTypeForm.tableType)
-  } else {
+  if (tableTypeForm.tableType.id) {
     const table = stateSelector.findTableForId(tableTypeForm.table.id)
     Object.assign(table, tableTypeForm.table)
+  } else {
+    state.tableTypes.push(tableTypeForm.tableType)
   }
 }
 

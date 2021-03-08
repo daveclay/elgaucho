@@ -13,10 +13,10 @@ import TableIcon from "./TableIcon";
 import TableTypeForm from "./TableTypeForm";
 
 const tableNameDisplay = (table) => {
-  if (table.isNew) {
-    return "New Table"
-  } else {
+  if (table.id) {
     return `Table ${table.name}`
+  } else {
+    return "New Table"
   }
 }
 
