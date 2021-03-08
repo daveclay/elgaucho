@@ -18,7 +18,7 @@ ReactDOM.render(
 )
 
 const steps = [
-    () => onOpenTableForm(),
+    // () => onOpenTableForm(),
     // () => onOpenTableTypeForm(),
 ]
 

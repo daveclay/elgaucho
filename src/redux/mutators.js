@@ -1,13 +1,11 @@
 import {
   newStateSelector
 } from "../selectors/selectors";
-import {deepCopy} from "../utils";
 import {newTable} from "../tableUtils";
 
 /************************************************
  * Mutators
  ************************************************/
-
 export const buildTablesFromConfig = state => {
   const stateSelector = newStateSelector(state)
 

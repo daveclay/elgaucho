@@ -52,3 +52,7 @@ export const onAdjustTableSize = (width, height) => ({
   width,
   height
 })
+
+export const onReset = () => ({
+  type: 'onReset'
+})
