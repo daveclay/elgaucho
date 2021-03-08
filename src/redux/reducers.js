@@ -13,7 +13,7 @@ import {
   saveTableTypeForm,
   hideTableTypeForm,
   showTableTypeForm,
-  adjustTableSize, initializeTableForm
+  adjustTableSize, initializeTableForm, deleteTable
 } from "./mutators"
 
 export const initialState = {
@@ -28,6 +28,7 @@ export const initialState = {
   ],
   tableTypes: [
     {
+      id: "tallRectTable",
       name: "tallRectTable",
       style: {
         width: 27,
@@ -36,6 +37,7 @@ export const initialState = {
       },
     },
     {
+      id: "wideRectTable",
       name: "wideRectTable",
       style: {
         width: 54,
@@ -44,6 +46,7 @@ export const initialState = {
       },
     },
     {
+      id: "togoTable",
       name: "togoTable",
       style: {
         height: 56,
@@ -52,6 +55,7 @@ export const initialState = {
       },
     },
     {
+      id: "fireTable",
       name: "fireTable",
       style: {
         width: 68,
@@ -61,6 +65,7 @@ export const initialState = {
       },
     },
     {
+      id: "smallCircleTable",
       name: "smallCircleTable",
       style: {
         width: 27,
@@ -70,6 +75,7 @@ export const initialState = {
       },
     },
     {
+      id: "medCircleTable",
       name: "medCircleTable",
       style: {
         width: 42,
@@ -79,6 +85,7 @@ export const initialState = {
       },
     },
     {
+      id: "smallSquareTable",
       name: "smallSquareTable",
       style: {
         width: 27,
@@ -87,6 +94,7 @@ export const initialState = {
       },
     },
     {
+      id: "medSquareTable",
       name: "medSquareTable",
       style: {
         width: 34,
@@ -95,6 +103,7 @@ export const initialState = {
       },
     },
     {
+      id: "largeSquareTable",
       name: "largeSquareTable",
       style: {
         width: 42,
@@ -103,6 +112,7 @@ export const initialState = {
       },
     },
     {
+      id: "smallDiamondTable",
       name: "smallDiamondTable",
       mixinTableStyleTypeId: "diamond",
       style: {
@@ -111,6 +121,7 @@ export const initialState = {
       },
     },
     {
+      id: "largeDiamondTable",
       name: "largeDiamondTable",
       mixinTableStyleTypeId: "diamond",
       style: {
@@ -119,6 +130,7 @@ export const initialState = {
       },
     },
     {
+      id: "vipRectTable",
       name: "vipRectTable",
       style: {
         width: 34,
@@ -440,13 +452,15 @@ export const initialState = {
   tables: [],
   tableForm: {
     visible: false,
-    table: null,
+    table: {
+      id: null,
+      name: "New"
+    },
   },
   tableTypeForm: {
     visible: false,
     tableType: {
       id: null,
-      isNew: true,
       name: "New",
       style: {
         width: 30,
@@ -459,7 +473,6 @@ export const initialState = {
   newTableTemplate: {
     id: null,
     name: "New",
-    isNew: true,
     tableType: null,
     tableColor: null,
   }
@@ -480,6 +493,7 @@ const onOpenTableForm = mutatorToReducer(showTableForm)
 const onCloseTableForm = mutatorToReducer(hideTableForm)
 const onSaveTableForm = mutatorsToReducer(saveTableForm, hideTableForm)
 const onUpdateTableName = mutatorsToReducer(updateTableName)
+const onDeleteTable = mutatorsToReducer(deleteTable, hideTableForm)
 
 const onOpenTableTypeForm = mutatorToReducer(showTableTypeForm)
 const onCloseTableTypeForm = mutatorToReducer(hideTableTypeForm)
@@ -496,6 +510,7 @@ map('onOpenTableForm', onOpenTableForm)
 map('onUpdateTableName', onUpdateTableName)
 map('onSaveTableForm', onSaveTableForm)
 map('onCloseTableForm', onCloseTableForm)
+map('onDeleteTable', onDeleteTable)
 map('onOpenTableTypeForm', onOpenTableTypeForm)
 map('onUpdateTableTypeName', onUpdateTableTypeName)
 map('onSaveTableTypeForm', onSaveTableTypeForm)

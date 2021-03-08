@@ -2,6 +2,7 @@ import {
   newStateSelector
 } from "../selectors/selectors";
 import {newTable} from "../tableUtils";
+import {mutatorsToReducer} from "../utils";
 
 /************************************************
  * Mutators
@@ -53,6 +54,14 @@ export const saveTableForm = state => {
     tableForm.table.y = 100
     state.tables.push(tableForm.table)
     tableForm.table = newTable(state)
+  }
+}
+
+export const deleteTable = state => {
+  const tableForm = state.tableForm
+  const id = tableForm.table.id
+  if (id) {
+    state.tables = state.tables.filter(table => table.id !== id)
   }
 }
 

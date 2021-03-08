@@ -10,10 +10,10 @@ import {Button, Col, Container, Form, Modal, Row} from "react-bootstrap";
 import TableIcon from "./TableIcon";
 
 const tableNameDisplay = (tableType) => {
-  if (tableType.isNew) {
-    return "New Table Type"
-  } else {
+  if (tableType.id) {
     return `Table ${tableType.name}`
+  } else {
+    return "New Table Type"
   }
 }
 

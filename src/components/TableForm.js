@@ -4,7 +4,8 @@ import {
   onUpdateTableName,
   onTableColorSelected,
   onCloseTableForm,
-  onSaveTableForm
+  onSaveTableForm,
+  onDeleteTable
 } from "../redux/actions"
 import TableTypeDropdown from "./TableTypeDropdown";
 import {Button, Col, Container, Form, Modal, Row} from "react-bootstrap";
@@ -26,7 +27,8 @@ const TableForm = ({
                      onTableColorSelected,
                      onUpdateTableName,
                      onCloseTableForm,
-                     onSaveTableForm
+                     onSaveTableForm,
+                     onDeleteTable
 }) => (
     <div id="table-form">
       <div className="config-option">
@@ -77,6 +79,13 @@ const TableForm = ({
           <TableTypeForm />
         </Modal.Body>
         <Modal.Footer>
+          {
+            tableForm.table.id ?
+              <Button variant="danger" onClick={onDeleteTable} className="mr-auto">
+                Delete
+              </Button>
+              : null
+          }
           <Button variant="secondary" onClick={onCloseTableForm}>
             Cancel
           </Button>
@@ -100,6 +109,7 @@ export default connect(
     onUpdateTableName,
     onTableColorSelected,
     onCloseTableForm,
-    onSaveTableForm
+    onSaveTableForm,
+    onDeleteTable
   }
 )(TableForm);
