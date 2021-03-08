@@ -35,29 +35,32 @@ const TableForm = ({
           <Modal.Title>{tableNameDisplay(tableForm.table)}</Modal.Title>
         </Modal.Header>
         <Modal.Body className="table-form-modal">
-          <Container>
+          <Form>
+            <Container>
             <Row>
               <Col>
-                Name
-              </Col>
-              <Col>
-                <Form>
+                <Form.Group controlId="name">
+                  <Form.Label>Name</Form.Label>
                   <Form.Control type="text"
                                 value={tableForm.table.name}
                                 onChange={(e) => onUpdateTableName(e.target.value)}/>
-                </Form>
+                </Form.Group>
               </Col>
             </Row>
             <Row>
-              <Col>Table Type</Col>
               <Col>
-                <TableTypeDropdown />
+                <Form.Group controlId="type">
+                  <Form.Label>Table Type</Form.Label>
+                  <TableTypeDropdown />
+                </Form.Group>
               </Col>
             </Row>
             <Row>
-              <Col>Color</Col>
               <Col>
-                <TableColorDropdown />
+                <Form.Group controlId="color">
+                  <Form.Label>Color</Form.Label>
+                  <TableColorDropdown />
+                </Form.Group>
               </Col>
             </Row>
             <Row>
@@ -66,6 +69,7 @@ const TableForm = ({
               </Col>
             </Row>
           </Container>
+          </Form>
           <TableTypeForm />
         </Modal.Body>
         <Modal.Footer>

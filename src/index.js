@@ -6,7 +6,7 @@ import store from './redux/store'
 import App from './components/App'
 
 import {
-    onOpenTableForm, onOpenTableTypeForm
+    onOpenTableForm
 } from "./redux/actions";
 
 const rootElement = document.getElementById('root')
@@ -19,7 +19,7 @@ ReactDOM.render(
 
 const steps = [
     () => onOpenTableForm(),
-    () => onOpenTableTypeForm(),
+    // () => onOpenTableTypeForm(),
 ]
 
 let currentStepIndex = 0;
