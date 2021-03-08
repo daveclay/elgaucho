@@ -13,7 +13,7 @@ import {
   saveTableTypeForm,
   hideTableTypeForm,
   showTableTypeForm,
-  adjustTableSize
+  adjustTableSize, initializeTableForm
 } from "./mutators"
 
 export const initialState = {
@@ -440,29 +440,33 @@ export const initialState = {
   tables: [],
   tableForm: {
     visible: false,
-    tableType: null,
-    tableColor: null,
-    table: {
-      name: "New",
-      isNew: true,
-    }
+    table: null,
   },
   tableTypeForm: {
     visible: false,
     tableType: {
+      id: null,
       isNew: true,
       name: "New",
       style: {
         width: 30,
         height: 30,
-        backgroundColor: "rgb(40, 40, 40)",
+        backgroundColor: "rgb(80, 80, 80)",
         borderRadius: "5px"
       }
     }
+  },
+  newTableTemplate: {
+    id: null,
+    name: "New",
+    isNew: true,
+    tableType: null,
+    tableColor: null,
   }
 }
 
 const init = mutatorsToReducer(
+  initializeTableForm,
   buildTablesFromConfig,
   defaultTableForm
 )

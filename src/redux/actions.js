@@ -2,19 +2,15 @@ export const init = () => ({
   type: 'init'
 })
 
-export const onTableTypeSelected = (tableType) => (dispatch) => {
-  dispatch({
+export const onTableTypeSelected = tableType => ({
     type: 'onTableTypeSelected',
     tableType
-  })
-}
+})
 
-export const onTableColorSelected = (tableColor) => (dispatch) => {
-  dispatch({
-    type: 'onTableColorSelected',
-    tableColor
-  })
-}
+export const onTableColorSelected = (color) => ({
+  type: 'onTableColorSelected',
+  color
+})
 
 export const onOpenTableForm = (table) => ({
   type: 'onOpenTableForm',

@@ -1,6 +1,8 @@
 import {
   newStateSelector
 } from "../selectors/selectors";
+import {deepCopy} from "../utils";
+import {newTable} from "../tableUtils";
 
 /************************************************
  * Mutators
@@ -31,7 +33,9 @@ export const defaultTableForm = (state) => {
     tableType: state.tableTypes[0]
   })
   setTableFormColor(state, {
-    tableColor: state.tableColors[0]
+    color: {
+      hex: state.tableColors[0].style.backgroundColor
+    }
   })
 }
 
@@ -57,18 +61,17 @@ export const setTableFormType = (state, action) => {
 
 export const setTableFormColor = (state, action) => {
   const tableForm = state.tableForm
-  tableForm.table.tableColor = action.tableColor
+  tableForm.table.tableColor.style.backgroundColor = action.color.hex
+}
+
+export const initializeTableForm = state => {
+  state.tableForm.table = newTable(state)
 }
 
 export const showTableForm = (state, action) => {
   const tableForm = state.tableForm
   tableForm.visible = true
-  const table = action.table || {
-    ...state.tableForm.table,
-    tableType: state.tableTypes[0],
-    tableColor: state.tableColors[0]
-  }
-  tableForm.table = table
+  tableForm.table = action.table || newTable(state)
 }
 
 export const hideTableForm = state => {

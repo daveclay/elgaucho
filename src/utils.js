@@ -1,5 +1,7 @@
 import produce from "immer";
 
+export const deepCopy = obj => JSON.parse(JSON.stringify(obj))
+
 export const ArrayUtils = {
   clone: function(array) {
     return [...array];

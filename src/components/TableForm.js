@@ -2,12 +2,13 @@ import {connect} from "react-redux";
 import {
   onOpenTableForm,
   onUpdateTableName,
+  onTableColorSelected,
   onCloseTableForm,
   onSaveTableForm
 } from "../redux/actions"
 import TableTypeDropdown from "./TableTypeDropdown";
-import TableColorDropdown from "./TableColorDropdown";
 import {Button, Col, Container, Form, Modal, Row} from "react-bootstrap";
+import { CirclePicker } from 'react-color';
 import TableIcon from "./TableIcon";
 import TableTypeForm from "./TableTypeForm";
 
@@ -22,6 +23,7 @@ const tableNameDisplay = (table) => {
 const TableForm = ({
                      tableForm,
                      onOpenTableForm,
+                     onTableColorSelected,
                      onUpdateTableName,
                      onCloseTableForm,
                      onSaveTableForm
@@ -59,7 +61,9 @@ const TableForm = ({
               <Col>
                 <Form.Group controlId="color">
                   <Form.Label>Color</Form.Label>
-                  <TableColorDropdown />
+                  <CirclePicker
+                    onChange={onTableColorSelected}
+                  />
                 </Form.Group>
               </Col>
             </Row>
@@ -94,6 +98,7 @@ export default connect(
   {
     onOpenTableForm,
     onUpdateTableName,
+    onTableColorSelected,
     onCloseTableForm,
     onSaveTableForm
   }
