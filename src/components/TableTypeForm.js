@@ -17,11 +17,6 @@ const tableNameDisplay = (tableType) => {
   }
 }
 
-const foo = (tableTypeForm) => {
-  console.log(tableTypeForm.tableType.style.height)
-  return tableTypeForm.tableType.style.height
-}
-
 const TableTypeForm = ({
                          tableTypeForm,
                          onUpdateTableTypeName,
@@ -58,7 +53,7 @@ const TableTypeForm = ({
                 <Form.Group controlId="height">
                   <Form.Label>Height</Form.Label>
                   <Form.Control type="range"
-                                value={foo(tableTypeForm)}
+                                value={tableTypeForm.tableType.style.height}
                                 min={10}
                                 max={200}
                                 onChange={(e) =>
