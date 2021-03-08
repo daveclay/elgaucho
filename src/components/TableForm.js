@@ -38,11 +38,7 @@ const TableForm = ({
           <Container>
             <Row>
               <Col>
-                <TableTypeDropdown />
-                <TableColorDropdown />
-              </Col>
-              <Col>
-                <TableIcon table={tableForm.table}/>
+                Name
               </Col>
               <Col>
                 <Form>
@@ -50,6 +46,23 @@ const TableForm = ({
                                 value={tableForm.table.name}
                                 onChange={(e) => onUpdateTableName(e.target.value)}/>
                 </Form>
+              </Col>
+            </Row>
+            <Row>
+              <Col>Table Type</Col>
+              <Col>
+                <TableTypeDropdown />
+              </Col>
+            </Row>
+            <Row>
+              <Col>Color</Col>
+              <Col>
+                <TableColorDropdown />
+              </Col>
+            </Row>
+            <Row>
+              <Col>
+                <TableIcon table={tableForm.table}/>
               </Col>
             </Row>
           </Container>

@@ -31,7 +31,13 @@ const TableTypeForm = ({
           <Container>
             <Row>
               <Col>
-                <TableIcon table={tableTypeForm.tableType}/>
+                Name
+              </Col>
+              <Col>
+                <TableIcon table={{
+                  name: "foo",
+                  tableType: tableTypeForm.tableType
+                }}/>
               </Col>
               <Col>
                 <Form>

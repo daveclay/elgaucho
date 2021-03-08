@@ -64,8 +64,7 @@ export const showTableForm = (state, action) => {
   const tableForm = state.tableForm
   tableForm.visible = true
   const table = action.table || {
-    name: "New",
-    isNew: true,
+    ...state.tableForm.table,
     tableType: state.tableTypes[0],
     tableColor: state.tableColors[0]
   }
@@ -94,11 +93,7 @@ export const saveTableTypeForm = state => {
 export const showTableTypeForm = (state, action) => {
   const tableTypeForm = state.tableTypeForm
   tableTypeForm.visible = true
-  const tableType = action.tableType || {
-    name: "New",
-    isNew: true,
-    style: {}
-  }
+  const tableType = action.tableType || state.tableTypeForm.tableType
   tableTypeForm.tableType = tableType
 }
 

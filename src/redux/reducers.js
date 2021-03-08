@@ -437,14 +437,21 @@ export const initialState = {
     tableType: null,
     tableColor: null,
     table: {
-      style: {}
+      name: "New",
+      isNew: true,
     }
   },
   tableTypeForm: {
     visible: false,
     tableType: {
+      isNew: true,
       name: "New",
-      style: {}
+      style: {
+        width: "30px",
+        height: "30px",
+        backgroundColor: "rgb(40, 40, 40)",
+        borderRadius: "5px"
+      }
     }
   }
 }
