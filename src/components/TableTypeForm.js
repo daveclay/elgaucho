@@ -18,6 +18,11 @@ const tableNameDisplay = (tableType) => {
   }
 }
 
+const ConsoleLog = ({ children }) => {
+  console.log(children);
+  return false;
+};
+
 const TableTypeForm = ({
                          tableTypeForm,
                          onUpdateTableTypeName,
@@ -35,47 +40,47 @@ const TableTypeForm = ({
         <Form>
           <Container>
             <Row>
-              <Col>
-                <Form.Group controlId="name">
+              <Col xs={4}>
+                <Form.Group controlId="tableTypeName">
                   <Form.Label>Name</Form.Label>
                   <Form.Control type="text"
                                 value={tableTypeForm.tableType.name}
                                 onChange={(e) =>
                                   onUpdateTableTypeName(e.target.value)}/>
                 </Form.Group>
-                <Form.Group controlId="width">
+                <Form.Group controlId="tableTypeWidth">
                   <Form.Label>Width</Form.Label>
                   <Form.Control type="range"
-                                value={tableTypeForm.tableType.style.width}
-                                min={10}
+                                value={tableTypeForm.tableType.styleConfig.width}
+                                min={20}
                                 max={200}
                                 onChange={(e) =>
-                                  onAdjustTableSize(e.target.value, tableTypeForm.tableType.style.height) }/>
+                                  onAdjustTableSize(e.target.value, tableTypeForm.tableType.styleConfig.height) }/>
                 </Form.Group>
-                <Form.Group controlId="height">
+                <Form.Group controlId="tableTypeHeight">
                   <Form.Label>Height</Form.Label>
                   <Form.Control type="range"
-                                value={tableTypeForm.tableType.style.height}
-                                min={10}
+                                value={tableTypeForm.tableType.styleConfig.height}
+                                min={20}
                                 max={200}
                                 onChange={(e) =>
-                                  onAdjustTableSize(tableTypeForm.tableType.style.width, e.target.value) }/>
+                                  onAdjustTableSize(tableTypeForm.tableType.styleConfig.width, e.target.value) }/>
                 </Form.Group>
                 <Form.Group controlId="height">
                   <Form.Label>Rotate</Form.Label>
                   <Form.Control type="range"
-                                value={tableTypeForm.tableType.style.height}
+                                value={tableTypeForm.tableType.styleConfig.rotation || 0}
                                 min={0}
                                 max={360}
                                 onChange={(e) =>
                                   onAdjustTableRotation(e.target.value) }/>
                 </Form.Group>
               </Col>
-              <Col>
+              <Col xs={8}>
                 <TableIcon table={{
                   name: "foo",
                   tableType: tableTypeForm.tableType
-                }}/>
+                }} style={{ marginLeft: "30%", marginTop: "30%"}}/>
               </Col>
             </Row>
           </Container>

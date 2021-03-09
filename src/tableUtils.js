@@ -1,15 +1,33 @@
 import {deepCopy} from "./utils";
 
-export const defaultStyle = { style: {} }
+export const defaultStyle = { styleConfig: {} }
+
+function translateStyle(styleConfig) {
+  const translatedStyle = {
+    ...styleConfig
+  }
+
+  if (styleConfig.rotation) {
+    translatedStyle.transform = `rotate(${styleConfig.rotation}deg)`
+  }
+
+  if (styleConfig.width) {
+    translatedStyle.width = `${styleConfig.width}px`
+  }
+
+  if (styleConfig.height) {
+    translatedStyle.height = `${styleConfig.height}px`
+  }
+
+  return translatedStyle
+}
 
 export function buildTableStyle(tableType = defaultStyle,
                                 tableColor = defaultStyle) {
-  const translatedStyle = {
-    ...tableType.style,
-    width: `${tableType.style.width}px`,
-    height: `${tableType.style.height}px`
-  }
-  return Object.assign({}, translatedStyle, tableColor.style)
+
+  return Object.assign({},
+    translateStyle(tableType.styleConfig),
+    translateStyle(tableColor.styleConfig))
 }
 
 export function newTable(state) {

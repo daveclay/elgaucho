@@ -9,15 +9,6 @@ import {mutatorsToReducer} from "../utils";
  ************************************************/
 export const buildTablesFromConfig = state => {
   const stateSelector = newStateSelector(state)
-
-  state.tableTypes.forEach(tableType => {
-    if (tableType.mixinTableStyleTypeId) {
-      const mixin = stateSelector.findTableTypeMixinForName(tableType.mixinTableStyleTypeId)
-      // TODO: don't do this here, but only at display time. means passing the lookup to components.
-      Object.assign(tableType.style, mixin.style)
-    }
-  })
-
   state.tables = state.tableConfigs.map(config=> {
     return {
       ...config,
@@ -33,13 +24,12 @@ export const defaultTableForm = (state) => {
   })
   setTableFormColor(state, {
     color: {
-      hex: state.tableColors[0].style.backgroundColor
+      hex: state.tableColors[0].styleConfig.backgroundColor
     }
   })
 }
 
 export const tableMoved = (state, action) => {
-  console.log(action.table, action.x, action.y)
   const table = newStateSelector(state).findTableForId(action.table.id)
   table.x = action.x
   table.y = action.y
@@ -79,7 +69,7 @@ export const setTableFormType = (state, action) => {
 
 export const setTableFormColor = (state, action) => {
   const tableForm = state.tableForm
-  tableForm.table.tableColor.style.backgroundColor = action.color.hex
+  tableForm.table.tableColor.styleConfig.backgroundColor = action.color.hex
 }
 
 export const initializeTableForm = state => {
@@ -123,10 +113,10 @@ export const hideTableTypeForm = state => {
 }
 
 export const adjustTableSize = (state, action) => {
-  state.tableTypeForm.tableType.style.width = action.width
-  state.tableTypeForm.tableType.style.height = action.height
+  state.tableTypeForm.tableType.styleConfig.width = action.width
+  state.tableTypeForm.tableType.styleConfig.height = action.height
 }
 
 export const adjustTableRotation = (state, action) => {
-  state.tableTypeForm.tableType.style.transform = `rotate(${action.rotation}deg)`
+  state.tableTypeForm.tableType.styleConfig.rotation = action.rotation
 }

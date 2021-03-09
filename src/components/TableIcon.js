@@ -1,9 +1,12 @@
 import { connect } from "react-redux";
 import {buildTableStyle} from "../tableUtils";
 
-const TableIcon = ({table}) => (
+const TableIcon = ({table, style}) => (
     <div className="table" style={
-      buildTableStyle(table.tableType, table.tableColor)
+      {
+        ...style,
+        ...buildTableStyle(table.tableType, table.tableColor)
+      }
     }/>
 )
 

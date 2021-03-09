@@ -19,20 +19,11 @@ import {
 } from "./mutators"
 
 export const initialState = {
-  tableTypeStyleMixins: [
-    {
-      name: "diamond",
-      style: {
-        transform: "rotate(45deg)",
-        borderRadius: "5px",
-      }
-    }
-  ],
   tableTypes: [
     {
       id: "tallRectTable",
       name: "tallRectTable",
-      style: {
+      styleConfig: {
         width: 27,
         height: 54,
         borderRadius: "5px"
@@ -41,7 +32,7 @@ export const initialState = {
     {
       id: "wideRectTable",
       name: "wideRectTable",
-      style: {
+      styleConfig: {
         width: 54,
         height: 27,
         borderRadius: "5px"
@@ -50,7 +41,7 @@ export const initialState = {
     {
       id: "togoTable",
       name: "togoTable",
-      style: {
+      styleConfig: {
         height: 56,
         width: 42,
         borderRadius: "5px"
@@ -59,7 +50,7 @@ export const initialState = {
     {
       id: "fireTable",
       name: "fireTable",
-      style: {
+      styleConfig: {
         width: 68,
         height: 68,
         lineHeight: "68px",
@@ -69,7 +60,7 @@ export const initialState = {
     {
       id: "smallCircleTable",
       name: "smallCircleTable",
-      style: {
+      styleConfig: {
         width: 27,
         height: 27,
         lineHeight: "27px",
@@ -79,7 +70,7 @@ export const initialState = {
     {
       id: "medCircleTable",
       name: "medCircleTable",
-      style: {
+      styleConfig: {
         width: 42,
         height: 42,
         lineHeight: "40px",
@@ -89,7 +80,7 @@ export const initialState = {
     {
       id: "smallSquareTable",
       name: "smallSquareTable",
-      style: {
+      styleConfig: {
         width: 27,
         height: 27,
         borderRadius: "5px"
@@ -98,7 +89,7 @@ export const initialState = {
     {
       id: "medSquareTable",
       name: "medSquareTable",
-      style: {
+      styleConfig: {
         width: 34,
         height: 34,
         borderRadius: "5px"
@@ -107,7 +98,7 @@ export const initialState = {
     {
       id: "largeSquareTable",
       name: "largeSquareTable",
-      style: {
+      styleConfig: {
         width: 42,
         height: 42,
         borderRadius: "5px"
@@ -116,8 +107,9 @@ export const initialState = {
     {
       id: "smallDiamondTable",
       name: "smallDiamondTable",
-      mixinTableStyleTypeId: "diamond",
-      style: {
+      styleConfig: {
+        rotation: 45,
+        borderRadius: "5px",
         width: 27,
         height: 27
       },
@@ -125,8 +117,9 @@ export const initialState = {
     {
       id: "largeDiamondTable",
       name: "largeDiamondTable",
-      mixinTableStyleTypeId: "diamond",
-      style: {
+      styleConfig: {
+        rotation: 45,
+        borderRadius: "5px",
         width: 32,
         height: 32
       },
@@ -134,7 +127,7 @@ export const initialState = {
     {
       id: "vipRectTable",
       name: "vipRectTable",
-      style: {
+      styleConfig: {
         width: 34,
         height: 68,
         borderRadius: "5px"
@@ -144,19 +137,19 @@ export const initialState = {
   tableColors: [
     {
       name: "blue",
-      style: {
+      styleConfig: {
         backgroundColor: "rgb(62, 148, 229)"
       }
     },
     {
       name: "green",
-      style: {
+      styleConfig: {
         backgroundColor: "rgb(71, 180, 152)"
       }
     },
     {
       name: "white",
-      style: {
+      styleConfig: {
         backgroundColor: "rgb(255, 255, 255)"
       }
     }
@@ -464,7 +457,7 @@ export const initialState = {
     tableType: {
       id: null,
       name: "New",
-      style: {
+      styleConfig: {
         width: 30,
         height: 30,
         backgroundColor: "rgb(80, 80, 80)",
