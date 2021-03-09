@@ -22,10 +22,11 @@ function translateStyle(styleConfig) {
   return translatedStyle
 }
 
-export function buildTableStyle(tableType = defaultStyle,
-                                tableColor = defaultStyle) {
-
+export function buildTableStyle(table) {
+  const tableType = table.tableType || defaultStyle
+  const tableColor = table.tableColor || defaultStyle
   return Object.assign({},
+    translateStyle(table.styleConfig),
     translateStyle(tableType.styleConfig),
     translateStyle(tableColor.styleConfig))
 }

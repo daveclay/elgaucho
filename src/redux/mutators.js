@@ -118,5 +118,9 @@ export const adjustTableSize = (state, action) => {
 }
 
 export const adjustTableRotation = (state, action) => {
+  state.tableForm.table.styleConfig.rotation = action.rotation
+}
+
+export const adjustTableTypeRotation = (state, action) => {
   state.tableTypeForm.tableType.styleConfig.rotation = action.rotation
 }

@@ -14,8 +14,8 @@ import {
   hideTableTypeForm,
   showTableTypeForm,
   adjustTableSize,
-  adjustTableRotation,
-  initializeTableForm, deleteTable, tableMoved
+  adjustTableTypeRotation,
+  initializeTableForm, deleteTable, tableMoved, adjustTableRotation
 } from "./mutators"
 
 export const initialState = {
@@ -160,6 +160,7 @@ export const initialState = {
       y: 746,
       typeId: "togoTable",
       colorId: "blue",
+      styleConfig: {},
       name: "togo",
 			id: "togo"
     },
@@ -168,6 +169,7 @@ export const initialState = {
       y: 338,
       typeId: "fireTable",
       colorId: "blue",
+      styleConfig: {},
       name: "fire",
 			id: "fire"
     },
@@ -176,6 +178,7 @@ export const initialState = {
       y: 642,
       typeId: "smallCircleTable",
       colorId: "white",
+      styleConfig: {},
       name: "1",
 			id: "1"
     },
@@ -184,6 +187,7 @@ export const initialState = {
       y: 642,
       typeId: "smallCircleTable",
       colorId: "green",
+      styleConfig: {},
       name: "2",
 			id: "2"
     },
@@ -192,6 +196,7 @@ export const initialState = {
       y: 283,
       typeId: "smallCircleTable",
       colorId: "white",
+      styleConfig: {},
       name: "3",
 			id: "3"
     },
@@ -200,6 +205,7 @@ export const initialState = {
       y: 284,
       typeId: "smallCircleTable",
       colorId: "white",
+      styleConfig: {},
       name: "4",
 			id: "4"
     },
@@ -208,6 +214,7 @@ export const initialState = {
       y: 747,
       typeId: "tallRectTable",
       colorId: "green",
+      styleConfig: {},
       name: "20",
 			id: "20"
     },
@@ -216,6 +223,7 @@ export const initialState = {
       y: 743,
       typeId: "smallSquareTable",
       colorId: "white",
+      styleConfig: {},
       name: "21",
 			id: "21"
     },
@@ -224,6 +232,7 @@ export const initialState = {
       y: 855,
       typeId: "smallSquareTable",
       colorId: "white",
+      styleConfig: {},
       name: "22",
 			id: "22"
     },
@@ -232,6 +241,7 @@ export const initialState = {
       y: 851,
       typeId: "largeSquareTable",
       colorId: "green",
+      styleConfig: {},
       name: "23",
 			id: "23"
     },
@@ -240,6 +250,7 @@ export const initialState = {
       y: 187,
       typeId: "medCircleTable",
       colorId: "green",
+      styleConfig: {},
       name: "60",
 			id: "60"
     },
@@ -248,6 +259,7 @@ export const initialState = {
       y: 187,
       typeId: "medCircleTable",
       colorId: "green",
+      styleConfig: {},
       name: "61",
 			id: "61"
     },
@@ -256,6 +268,7 @@ export const initialState = {
       y: 187,
       typeId: "medCircleTable",
       colorId: "green",
+      styleConfig: {},
       name: "62",
 			id: "62"
     },
@@ -264,6 +277,7 @@ export const initialState = {
       y: 187,
       typeId: "medCircleTable",
       colorId: "blue",
+      styleConfig: {},
       name: "63",
 			id: "63"
     },
@@ -272,6 +286,7 @@ export const initialState = {
       y: 297,
       typeId: "smallDiamondTable",
       colorId: "white",
+      styleConfig: {},
       name: "30",
 			id: "30"
     },
@@ -280,6 +295,7 @@ export const initialState = {
       y: 297,
       typeId: "smallDiamondTable",
       colorId: "green",
+      styleConfig: {},
       name: "31",
 			id: "31"
     },
@@ -288,6 +304,7 @@ export const initialState = {
       y: 285,
       typeId: "tallRectTable",
       colorId: "green",
+      styleConfig: {},
       name: "40",
 			id: "40"
     },
@@ -296,6 +313,7 @@ export const initialState = {
       y: 410,
       typeId: "tallRectTable",
       colorId: "green",
+      styleConfig: {},
       name: "41",
 			id: "41"
     },
@@ -304,6 +322,7 @@ export const initialState = {
       y: 547,
       typeId: "medSquareTable",
       colorId: "white",
+      styleConfig: {},
       name: "42",
 			id: "42"
     },
@@ -312,6 +331,7 @@ export const initialState = {
       y: 443,
       typeId: "largeDiamondTable",
       colorId: "green",
+      styleConfig: {},
       name: "50",
 			id: "50"
     },
@@ -320,6 +340,7 @@ export const initialState = {
       y: 580,
       typeId: "smallDiamondTable",
       colorId: "green",
+      styleConfig: {},
       name: "51",
 			id: "51"
     },
@@ -328,6 +349,7 @@ export const initialState = {
       y: 766,
       typeId: "vipRectTable",
       colorId: "green",
+      styleConfig: {},
       name: "53",
 			id: "53"
     },
@@ -336,6 +358,7 @@ export const initialState = {
       y: 236,
       typeId: "medCircleTable",
       colorId: "white",
+      styleConfig: {},
       name: "70",
 			id: "70"
     },
@@ -344,6 +367,7 @@ export const initialState = {
       y: 356,
       typeId: "medCircleTable",
       colorId: "green",
+      styleConfig: {},
       name: "71",
 			id: "71"
     },
@@ -352,6 +376,7 @@ export const initialState = {
       y: 482,
       typeId: "medCircleTable",
       colorId: "green",
+      styleConfig: {},
       name: "72",
 			id: "72"
     },
@@ -360,6 +385,7 @@ export const initialState = {
       y: 519,
       typeId: "tallRectTable",
       colorId: "green",
+      styleConfig: {},
       name: "90",
 			id: "90"
     },
@@ -368,6 +394,7 @@ export const initialState = {
       y: 387,
       typeId: "tallRectTable",
       colorId: "green",
+      styleConfig: {},
       name: "91",
 			id: "91"
     },
@@ -376,6 +403,7 @@ export const initialState = {
       y: 486,
       typeId: "wideRectTable",
       colorId: "white",
+      styleConfig: {},
       name: "101",
 			id: "101"
     },
@@ -384,6 +412,7 @@ export const initialState = {
       y: 362,
       typeId: "largeDiamondTable",
       colorId: "white",
+      styleConfig: {},
       name: "102",
 			id: "102"
     },
@@ -392,6 +421,7 @@ export const initialState = {
       y: 249,
       typeId: "wideRectTable",
       colorId: "white",
+      styleConfig: {},
       name: "103",
 			id: "103"
     },
@@ -400,6 +430,7 @@ export const initialState = {
       y: 201,
       typeId: "tallRectTable",
       colorId: "white",
+      styleConfig: {},
       name: "104",
 			id: "104"
     },
@@ -408,6 +439,7 @@ export const initialState = {
       y: 328,
       typeId: "wideRectTable",
       colorId: "white",
+      styleConfig: {},
       name: "105",
 			id: "105"
     },
@@ -416,6 +448,7 @@ export const initialState = {
       y: 423,
       typeId: "wideRectTable",
       colorId: "white",
+      styleConfig: {},
       name: "106",
 			id: "106"
     },
@@ -424,6 +457,7 @@ export const initialState = {
       y: 661,
       typeId: "largeDiamondTable",
       colorId: "white",
+      styleConfig: {},
       name: "201",
 			id: "201"
     },
@@ -432,6 +466,7 @@ export const initialState = {
       y: 797,
       typeId: "tallRectTable",
       colorId: "white",
+      styleConfig: {},
       name: "202",
 			id: "202"
     },
@@ -440,6 +475,7 @@ export const initialState = {
       y: 742,
       typeId: "smallCircleTable",
       colorId: "white",
+      styleConfig: {},
       name: "203",
 			id: "203"
     }
@@ -470,6 +506,7 @@ export const initialState = {
     name: "New",
     tableType: null,
     tableColor: null,
+    styleConfig: {}
   }
 }
 
@@ -490,6 +527,7 @@ const onOpenTableForm = mutatorToReducer(showTableForm)
 const onCloseTableForm = mutatorToReducer(hideTableForm)
 const onSaveTableForm = mutatorsToReducer(saveTableForm, hideTableForm)
 const onUpdateTableName = mutatorsToReducer(updateTableName)
+const onAdjustTableRotation = mutatorsToReducer(adjustTableRotation)
 const onDeleteTable = mutatorsToReducer(deleteTable, hideTableForm)
 
 const onOpenTableTypeForm = mutatorToReducer(showTableTypeForm)
@@ -497,7 +535,7 @@ const onCloseTableTypeForm = mutatorToReducer(hideTableTypeForm)
 const onSaveTableTypeForm = mutatorsToReducer(saveTableTypeForm, hideTableTypeForm)
 const onUpdateTableTypeName = mutatorsToReducer(updateTableTypeName)
 const onAdjustTableSize = mutatorsToReducer(adjustTableSize)
-const onAdjustTableRotation = mutatorsToReducer(adjustTableRotation)
+const onAdjustTableTypeRotation = mutatorsToReducer(adjustTableTypeRotation)
 const onReset = mutatorsToReducer(buildTablesFromConfig)
 
 map('init', init)
@@ -505,6 +543,7 @@ map('onReset', onReset)
 map('onTableMoved', onTableMoved)
 map('onTableTypeSelected', onTableTypeSelected)
 map('onTableColorSelected', onTableColorSelected)
+map('onAdjustTableRotation', onAdjustTableRotation)
 map('onOpenTableForm', onOpenTableForm)
 map('onUpdateTableName', onUpdateTableName)
 map('onSaveTableForm', onSaveTableForm)
@@ -515,6 +554,6 @@ map('onUpdateTableTypeName', onUpdateTableTypeName)
 map('onSaveTableTypeForm', onSaveTableTypeForm)
 map('onCloseTableTypeForm', onCloseTableTypeForm)
 map('onAdjustTableSize', onAdjustTableSize)
-map('onAdjustTableRotation', onAdjustTableRotation)
+map('onAdjustTableTypeRotation', onAdjustTableTypeRotation)
 
 export const rootReducer = reducer

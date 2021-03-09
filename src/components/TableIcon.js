@@ -5,7 +5,7 @@ const TableIcon = ({table, style}) => (
     <div className="table" style={
       {
         ...style,
-        ...buildTableStyle(table.tableType, table.tableColor)
+        ...buildTableStyle(table)
       }
     }/>
 )

@@ -27,6 +27,10 @@ export const onUpdateTableName = (name) => ({
   type: 'onUpdateTableName',
   name
 })
+export const onAdjustTableRotation = rotation => ({
+  type: 'onAdjustTableRotation',
+  rotation
+})
 
 export const onCloseTableForm = () => ({
   type: 'onCloseTableForm'
@@ -59,8 +63,8 @@ export const onAdjustTableSize = (width, height) => ({
   height
 })
 
-export const onAdjustTableRotation = rotation => ({
-  type: 'onAdjustTableRotation',
+export const onAdjustTableTypeRotation = rotation => ({
+  type: 'onAdjustTableTypeRotation',
   rotation
 })
 
