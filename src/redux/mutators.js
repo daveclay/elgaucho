@@ -38,6 +38,13 @@ export const defaultTableForm = (state) => {
   })
 }
 
+export const tableMoved = (state, action) => {
+  console.log(action.table, action.x, action.y)
+  const table = newStateSelector(state).findTableForId(action.table.id)
+  table.x = action.x
+  table.y = action.y
+}
+
 export const updateTableName = (state, action) => {
   state.tableForm.table.name = action.name
 }

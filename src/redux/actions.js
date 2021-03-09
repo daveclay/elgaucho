@@ -2,6 +2,12 @@ export const init = () => ({
   type: 'init'
 })
 
+export const onTableMoved = (table, draggableData) => ({
+  type: 'onTableMoved',
+  table,
+  ...draggableData
+})
+
 export const onTableTypeSelected = tableType => ({
     type: 'onTableTypeSelected',
     tableType

@@ -13,7 +13,7 @@ import {
   saveTableTypeForm,
   hideTableTypeForm,
   showTableTypeForm,
-  adjustTableSize, initializeTableForm, deleteTable
+  adjustTableSize, initializeTableForm, deleteTable, tableMoved
 } from "./mutators"
 
 export const initialState = {
@@ -483,6 +483,8 @@ const init = mutatorsToReducer(
   buildTablesFromConfig,
   defaultTableForm
 )
+
+const onTableMoved = mutatorsToReducer(tableMoved)
 const onTableTypeSelected = mutatorsToReducer(
   setTableFormType,
 )
@@ -504,6 +506,7 @@ const onReset = mutatorsToReducer(buildTablesFromConfig)
 
 map('init', init)
 map('onReset', onReset)
+map('onTableMoved', onTableMoved)
 map('onTableTypeSelected', onTableTypeSelected)
 map('onTableColorSelected', onTableColorSelected)
 map('onOpenTableForm', onOpenTableForm)
