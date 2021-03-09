@@ -4,7 +4,8 @@ import {
   onUpdateTableTypeName,
   onCloseTableTypeForm,
   onSaveTableTypeForm,
-  onAdjustTableSize
+  onAdjustTableSize,
+  onAdjustTableRotation
 } from "../redux/actions"
 import {Button, Col, Container, Form, Modal, Row} from "react-bootstrap";
 import TableIcon from "./TableIcon";
@@ -22,7 +23,8 @@ const TableTypeForm = ({
                          onUpdateTableTypeName,
                          onCloseTableTypeForm,
                          onSaveTableTypeForm,
-                         onAdjustTableSize
+                         onAdjustTableSize,
+                         onAdjustTableRotation
                        }) => (
   <div id="table-form">
     <Modal show={tableTypeForm.visible} onHide={onCloseTableTypeForm}>
@@ -59,6 +61,15 @@ const TableTypeForm = ({
                                 onChange={(e) =>
                                   onAdjustTableSize(tableTypeForm.tableType.style.width, e.target.value) }/>
                 </Form.Group>
+                <Form.Group controlId="height">
+                  <Form.Label>Rotate</Form.Label>
+                  <Form.Control type="range"
+                                value={tableTypeForm.tableType.style.height}
+                                min={0}
+                                max={360}
+                                onChange={(e) =>
+                                  onAdjustTableRotation(e.target.value) }/>
+                </Form.Group>
               </Col>
               <Col>
                 <TableIcon table={{
@@ -94,6 +105,7 @@ export default connect(
     onUpdateTableTypeName,
     onCloseTableTypeForm,
     onSaveTableTypeForm,
-    onAdjustTableSize
+    onAdjustTableSize,
+    onAdjustTableRotation
   }
 )(TableTypeForm);

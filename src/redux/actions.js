@@ -59,6 +59,11 @@ export const onAdjustTableSize = (width, height) => ({
   height
 })
 
+export const onAdjustTableRotation = rotation => ({
+  type: 'onAdjustTableRotation',
+  rotation
+})
+
 export const onReset = () => ({
   type: 'onReset'
 })

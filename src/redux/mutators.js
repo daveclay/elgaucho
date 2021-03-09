@@ -126,3 +126,7 @@ export const adjustTableSize = (state, action) => {
   state.tableTypeForm.tableType.style.width = action.width
   state.tableTypeForm.tableType.style.height = action.height
 }
+
+export const adjustTableRotation = (state, action) => {
+  state.tableTypeForm.tableType.style.transform = `rotate(${action.rotation}deg)`
+}
